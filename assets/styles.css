@@ -729,3 +729,44 @@ li::marker { color: var(--green); }
   50% { opacity: 0.6; }
 }
 .pulse { animation: pulse-soft 2s ease-in-out infinite; }
+
+/* Language toggle buttons */
+.lang-btn {
+  flex: 1;
+  padding: 8px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.lang-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.lang-btn.active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+/* Hide Google Translate ugly UI */
+.goog-te-banner-frame.skiptranslate,
+.goog-logo-link,
+.goog-te-gadget span,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+body { top: 0 !important; }
+.goog-te-gadget { color: transparent !important; font-size: 0 !important; }
+.goog-tooltip, .goog-tooltip:hover { display: none !important; }
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

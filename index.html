@@ -77,6 +77,29 @@
     padding: 8px 16px;
     font-size: 13px;
   }
+  .nav-lang {
+    display: flex;
+    background: var(--surface-2);
+    border-radius: 100px;
+    padding: 3px;
+  }
+  .nav-lang-btn {
+    padding: 5px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-lang-btn.active {
+    background: white;
+    color: var(--green);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
 
   @media (max-width: 700px) {
     .navbar-inner { padding: 0 20px; }
@@ -546,10 +569,14 @@
       <span>Talha's AI <span class="accent">Guide</span></span>
     </a>
     <div class="navbar-links">
-      <a href="pages/start-here.html">Start Here</a>
-      <a href="pages/business-ideas.html">Business Ideas</a>
-      <a href="pages/fiverr-guide.html">Earning</a>
-      <a href="pages/ask-talha.html" class="btn">💬 Ask Talha AI</a>
+      <a href="pages/start-here/">Start Here</a>
+      <a href="pages/business-ideas/">Business Ideas</a>
+      <a href="pages/fiverr-guide/">Earning</a>
+      <div class="nav-lang">
+        <button onclick="setLang('roman')" id="lang-roman" class="nav-lang-btn active">UR</button>
+        <button onclick="setLang('en')" id="lang-en" class="nav-lang-btn">EN</button>
+      </div>
+      <a href="pages/ask-talha/" class="btn">💬 Ask Talha AI</a>
     </div>
   </div>
 </nav>
@@ -573,8 +600,8 @@
           Coding nahi aati? Kuch nahi hota. Bas ek prompt likho, kaam shuru.
         </p>
         <div class="btn-row">
-          <a href="pages/start-here.html" class="btn">Shuru Karo</a>
-          <a href="pages/ask-talha.html" class="btn btn-outline">💬 Ask Talha AI</a>
+          <a href="pages/start-here/" class="btn">Shuru Karo</a>
+          <a href="pages/ask-talha/" class="btn btn-outline">💬 Ask Talha AI</a>
         </div>
 
         <div class="hero-stats">
@@ -640,7 +667,7 @@
 
     <div class="inside-grid">
 
-      <a href="pages/start-here.html" class="inside-card">
+      <a href="pages/start-here/" class="inside-card">
         <div class="inside-icon-wrap">🎯</div>
         <div class="inside-card-content">
           <span class="count">Step 1</span>
@@ -649,7 +676,7 @@
         </div>
       </a>
 
-      <a href="pages/claude-setup.html" class="inside-card">
+      <a href="pages/claude-setup/" class="inside-card">
         <div class="inside-icon-wrap">✨</div>
         <div class="inside-card-content">
           <span class="count">AI Tools</span>
@@ -658,7 +685,7 @@
         </div>
       </a>
 
-      <a href="pages/business-ideas.html" class="inside-card">
+      <a href="pages/business-ideas/" class="inside-card">
         <div class="inside-icon-wrap">💡</div>
         <div class="inside-card-content">
           <span class="count">100+ Ideas</span>
@@ -667,7 +694,7 @@
         </div>
       </a>
 
-      <a href="pages/fiverr-guide.html" class="inside-card">
+      <a href="pages/fiverr-guide/" class="inside-card">
         <div class="inside-icon-wrap">💰</div>
         <div class="inside-card-content">
           <span class="count">Earning Paths</span>
@@ -676,7 +703,7 @@
         </div>
       </a>
 
-      <a href="pages/build-apps.html" class="inside-card">
+      <a href="pages/build-apps/" class="inside-card">
         <div class="inside-icon-wrap">📱</div>
         <div class="inside-card-content">
           <span class="count">Build</span>
@@ -685,7 +712,7 @@
         </div>
       </a>
 
-      <a href="pages/free-hosting.html" class="inside-card">
+      <a href="pages/free-hosting/" class="inside-card">
         <div class="inside-icon-wrap">🌐</div>
         <div class="inside-card-content">
           <span class="count">Hosting</span>
@@ -694,7 +721,7 @@
         </div>
       </a>
 
-      <a href="pages/image-generation.html" class="inside-card">
+      <a href="pages/image-generation/" class="inside-card">
         <div class="inside-icon-wrap">🎨</div>
         <div class="inside-card-content">
           <span class="count">Visual</span>
@@ -703,7 +730,7 @@
         </div>
       </a>
 
-      <a href="pages/prompts-library.html" class="inside-card">
+      <a href="pages/prompts-library/" class="inside-card">
         <div class="inside-icon-wrap">📚</div>
         <div class="inside-card-content">
           <span class="count">Library</span>
@@ -729,7 +756,7 @@
 
     <div class="tools-grid">
 
-      <a href="pages/claude-setup.html" class="tool-card">
+      <a href="pages/claude-setup/" class="tool-card">
         <div class="tool-card-logo-big" style="background: #FAF9F5;">
           <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <g fill="#D97757">
@@ -745,7 +772,7 @@
         <div class="tool-card-link">Setup Guide dekho →</div>
       </a>
 
-      <a href="pages/wispr-setup.html" class="tool-card">
+      <a href="pages/wispr-setup/" class="tool-card">
         <div class="tool-card-logo-big" style="background: #0A0A0A;">
           <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
             <g fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round">
@@ -779,7 +806,7 @@
         24/7 available · Roman Urdu samajhta hai · Free
       </p>
     </div>
-    <a href="pages/ask-talha.html" class="btn">💬 Ask Talha AI →</a>
+    <a href="pages/ask-talha/" class="btn">💬 Ask Talha AI →</a>
   </div>
 </div>
 
@@ -814,10 +841,10 @@
 
       <div class="footer-col">
         <h4>Resource</h4>
-        <a href="pages/start-here.html"><span>🎯</span> Start Here</a>
-        <a href="pages/business-ideas.html"><span>💡</span> Business Ideas</a>
-        <a href="pages/prompts-library.html"><span>📚</span> Prompts Library</a>
-        <a href="pages/ask-talha.html"><span>💬</span> Ask Talha AI</a>
+        <a href="pages/start-here/"><span>🎯</span> Start Here</a>
+        <a href="pages/business-ideas/"><span>💡</span> Business Ideas</a>
+        <a href="pages/prompts-library/"><span>📚</span> Prompts Library</a>
+        <a href="pages/ask-talha/"><span>💬</span> Ask Talha AI</a>
       </div>
 
     </div>
@@ -828,6 +855,7 @@
   </div>
 </footer>
 
+<script src="assets/components.js"></script>
 <script src="assets/chat-widget.js"></script>
 </body>
 </html>
