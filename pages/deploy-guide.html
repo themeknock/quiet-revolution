@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VS Code + Live Deployment, Talha's AI Guide</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  .ask-callout {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ask-callout-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .ask-callout-content { flex: 1; min-width: 200px; }
+  .ask-callout h4 { color: white; font-size: 16px; margin: 0 0 4px; font-weight: 700; }
+  .ask-callout p { color: rgba(255,255,255,0.9); font-size: 14px; margin: 0; }
+  .ask-callout a {
+    background: white; color: var(--green); padding: 10px 18px;
+    border-radius: 100px; font-weight: 700; font-size: 13px;
+    white-space: nowrap; text-decoration: none;
+  }
+  .ask-callout a:hover { background: rgba(255,255,255,0.95); }
+
+  .terminal-block {
+    background: #0a1410;
+    color: #e0e0e0;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .terminal-block .green { color: var(--green); }
+  .terminal-block .gray { color: #888; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Pro Workflow · VS Code + Deploy</div>
+      <h1>VS Code Se Bolke Kaam, Live Deployment</h1>
+      <p class="lead">
+        Yeh exact workflow hai jaise main daily kaam karta hoon. VS Code + Claude Code + Wispr Flow.
+        App banao bolne se. Push karo. Live ho jaye. Bas.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>Yeh Setup Mera Daily Hai</h2>
+      <p>
+        Mein VS Code kholta hoon, Claude Code se baat karta hoon Wispr ke through, code likh deta hai,
+        phir GitHub pe push karta hoon, aur app live ho jaati hai. <strong>30 minute se kam ka kaam.</strong>
+      </p>
+      <p>Tum bhi bilkul yahi kar sakte ho. Yahan exact steps hain:</p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Phase 1, Setup (Ek Baar)</h2>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>VS Code Install Karo</h3>
+        <p><a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a> pe jao, free download. Mac/Windows/Linux sab pe chalti hai.</p>
+        <p>Install hone ke baad kholo. Pehli baar dikhega clean editor.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Claude Code Extension</h3>
+        <p>VS Code mein left sidebar pe "Extensions" icon (chautha icon). Search karo: <code>Claude</code></p>
+        <p><strong>"Claude Code"</strong> by Anthropic install karo. Yeh tumhe Claude se baat karne deta hai VS Code ke andar.</p>
+        <div class="callout">
+          <p><strong>Note:</strong> Claude Code ke liye <strong>Claude Pro subscription ($20/mo)</strong> chahiye. Bina Pro ke yeh feature kaam nahi karega.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Wispr Flow Install</h3>
+        <p>Apne system pe Wispr Flow install karo. <a href="wispr-setup.html">Full setup guide yahan</a></p>
+        <p>Iska kaam, jab tumhara cursor kahin bhi ho (VS Code, Claude, Browser), tum bolo, text aa jaaye.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>GitHub Account</h3>
+        <p>Free signup at <a href="https://github.com" target="_blank">github.com</a>. Yeh tumhara code save karne aur live deploy karne ke liye chahiye.</p>
+        <p><a href="free-hosting.html">Detailed GitHub setup yahan</a></p>
+      </div>
+    </section>
+
+    <div class="ask-callout">
+      <div class="ask-callout-icon">🤔</div>
+      <div class="ask-callout-content">
+        <h4>Setup Mein Stuck Ho?</h4>
+        <p>Ek bhi step pe atak gaye? Ask Talha AI ko exact problem batao, bottom-right green button click karo.</p>
+      </div>
+      <a href="ask-talha.html">Ask Talha AI →</a>
+    </div>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Phase 2, Daily Workflow</h2>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>VS Code Kholo, Naya Folder</h3>
+        <p>Apne Documents mein nayi folder banao, e.g. <code>my-app</code>. VS Code mein "File, Open Folder" karke woh folder kholo.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Claude Code Activate Karo</h3>
+        <p>VS Code mein right side pe Claude icon dikhega ab. Click karo, Claude Code panel khulega.</p>
+        <p>Pehli baar login mango ga, Claude account se sign in karo.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Wispr Daboo, Apna Idea Bolo</h3>
+        <p>Claude Code ke chat box mein cursor rakho. Wispr hotkey daboo, bolna shuru karo:</p>
+
+        <div class="terminal-block">
+          <span class="green">🎙️ Voice:</span> Mujhe ek booking system banao salon ke liye. Customer name, phone, service, date, time slot. WhatsApp pe confirmation message bheje. Mobile-friendly green theme. Files yahin is folder mein banao.
+        </div>
+
+        <p>Hotkey chhoro, text aa jaayega. Enter daboo.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Claude Code Khud Banata Hai</h3>
+        <p>Claude Code khud:</p>
+        <ul>
+          <li>Files banata hai (HTML, CSS, JS, ya Next.js project)</li>
+          <li>Code likhta hai</li>
+          <li>Folder structure set karta hai</li>
+          <li>Database connect karta hai agar zaroorat ho</li>
+        </ul>
+        <p>Tum sirf dekhte ho. Files left sidebar mein appear hoti hain.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Test Karo Local Pe</h3>
+        <p>Claude Code khud bata dega kaise run karna hai. Aam taur pe terminal mein:</p>
+        <div class="terminal-block">
+          <span class="gray">$</span> <span class="green">npm install</span><br/>
+          <span class="gray">$</span> <span class="green">npm run dev</span>
+        </div>
+        <p>Browser mein <code>localhost:3000</code> open karo, app dikh jaayegi.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <h3>Adjust Karo (Bolne Se)</h3>
+        <p>Kuch change chahiye? Wispr daboo, bolo:</p>
+        <div class="terminal-block">
+          <span class="green">🎙️ Voice:</span> Time slots 30-30 minute ke karo. Logo upload ka option add karo. Confirmation message mein customer ka naam highlight karo.
+        </div>
+        <p>Claude Code update kar deta hai apne aap.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Phase 3, Live Deploy Karna</h2>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Claude Code Ko Bolo, GitHub Pe Push Karo</h3>
+        <p>Wispr daboo:</p>
+        <div class="terminal-block">
+          <span class="green">🎙️ Voice:</span> Is project ka GitHub repo banao, code push karo, naam rakho salon-booking.
+        </div>
+        <p>Claude Code:</p>
+        <ul>
+          <li>Git initialize karta hai</li>
+          <li>GitHub pe new repo banata hai</li>
+          <li>Code push kar deta hai</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>GitHub Pages Enable Karo</h3>
+        <p>GitHub pe apna repo kholo:</p>
+        <ul>
+          <li>Settings tab</li>
+          <li>Pages (left sidebar)</li>
+          <li>Source: <code>main</code> branch, Save</li>
+        </ul>
+        <p>30 second mein live ho jaata hai is URL pe: <code>username.github.io/salon-booking</code></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Bas, Live Hai!</h3>
+        <p>Apna URL copy karo, client ko bhej do. App internet pe hai, kahin se bhi access ho sakti hai.</p>
+        <p>Future updates? Claude Code ko bolo: <em>"Yeh changes karo aur push karo"</em>, app auto-update.</p>
+      </div>
+    </section>
+
+    <div class="ask-callout">
+      <div class="ask-callout-icon">🚀</div>
+      <div class="ask-callout-content">
+        <h4>Pehla App Banaya?</h4>
+        <p>Ask Talha AI ko URL bhejo, mein review karunga aur improvement suggestions dunga.</p>
+      </div>
+      <a href="ask-talha.html">Review Lo →</a>
+    </div>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Real Workflow Example</h2>
+      <p>Yeh kal ka mera actual workflow tha, timestamp ke saath:</p>
+
+      <div class="callout">
+        <p><strong>9:00 AM</strong>, Chai banayi. Laptop khola.</p>
+        <p><strong>9:05 AM</strong>, VS Code kholi. Naya folder <code>cha-wala</code>.</p>
+        <p><strong>9:08 AM</strong>, Wispr daboo, Claude Code ko bolo: <em>"Cha Wala restaurant ke liye QR menu page banao. 5 chai variants, prices, photos placeholder, mobile-first design, green-orange theme."</em></p>
+        <p><strong>9:30 AM</strong>, Claude Code ne sab ban diya. Local pe test kiya, sab perfect.</p>
+        <p><strong>9:35 AM</strong>, Wispr daboo, <em>"GitHub pe push karo, Pages enable karo."</em></p>
+        <p><strong>9:40 AM</strong>, Live URL aa gaya. Client ko WhatsApp pe bhej diya.</p>
+        <p><strong>9:45 AM</strong>, Client ne bola "Logo upload karo." Wispr daboo, <em>"Header mein logo image add karo, with placeholder URL."</em></p>
+        <p><strong>9:50 AM</strong>, Update push, live URL pe reflect ho gaya.</p>
+        <p><strong>10:00 AM</strong>, Total: 1 ghante mein, full project delivered. <strong>Charge: Rs. 12,000.</strong></p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Common Confusions</h2>
+
+      <h3>"Claude Code aur Claude.ai mein farq kya hai?"</h3>
+      <p><strong>Claude.ai</strong>, browser version, basic chat ke liye. Free aur Pro dono.</p>
+      <p><strong>Claude Code</strong>, VS Code extension, code likhne ke liye. Pro subscription chahiye. Yeh asli power hai.</p>
+
+      <h3>"Pehle git, GitHub samjhna hai?"</h3>
+      <p>Nahi. Claude Code khud handle karega. Tum sirf bolo "GitHub pe push karo." Yeh terminal commands khud chala lega.</p>
+
+      <h3>"Errors aaye toh kya karoon?"</h3>
+      <p>Error message Claude Code ko paste karo, ya Wispr se bolo: <em>"Yeh error aa raha hai, fix karo."</em> Solve kar deta hai.</p>
+
+      <h3>"Multiple projects parallel mein?"</h3>
+      <p>VS Code mein different folders kholo. Each folder = different project = different GitHub repo = different live URL.</p>
+
+      <h3>"Phone se ho sakta hai?"</h3>
+      <p>Phone pe VS Code chalna mushkil hai. Laptop required hai is workflow ke liye. Phone se sirf Claude.ai chat use kar sakte ho.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Subscriptions, Honest Cost</h2>
+      <ul>
+        <li><strong>Claude Pro:</strong> $20/mo (zaroori, Claude Code ke liye)</li>
+        <li><strong>Wispr Pro:</strong> $15/mo (optional, free trial chal jaata hai pehle)</li>
+        <li><strong>VS Code:</strong> Free</li>
+        <li><strong>GitHub:</strong> Free</li>
+      </ul>
+      <p><strong>Total to start:</strong> $20/mo. Pehla project sell karne pe recover ho jaata hai.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <div class="ask-callout">
+      <div class="ask-callout-icon">💡</div>
+      <div class="ask-callout-content">
+        <h4>Naya Project Idea Hai?</h4>
+        <p>Ask Talha AI ko apna idea + budget batao, mein full plan dunga, kya tools, kitne din, kitne ka becho.</p>
+      </div>
+      <a href="ask-talha.html">Plan Lo →</a>
+    </div>
+
+    <section class="fade-up">
+      <h2>Next Step</h2>
+      <p>Setup ready hai? Ab <strong>actual project banao</strong> Claude Code se.</p>
+      <div class="btn-row">
+        <a href="build-apps.html" class="btn">Apps Banao Guide →</a>
+        <a href="business-ideas.html" class="btn btn-outline">Business Ideas</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

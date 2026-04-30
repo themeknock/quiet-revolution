@@ -24,7 +24,10 @@ Pricing context:
 Stay focused on AI/freelancing/earning topics. Politely redirect if asked about politics, religion, personal matters, harmful content.`;
 
 const WIDGET_CONFIG = {
-  OPENROUTER_API_KEY: '',
+  // Cloudflare Worker proxy. API key safely on server side.
+  USE_PROXY: true,
+  PROXY_URL: 'https://talha-ai-proxy.themeknock.workers.dev',
+  OPENROUTER_API_KEY: '', // Not needed when USE_PROXY=true
   MODEL: 'openai/gpt-oss-120b:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 800,
@@ -38,7 +41,8 @@ let widgetIsOpen = false;
 let widgetIsLoading = false;
 
 function getWidgetApiKey() {
-  // localStorage priority - user's custom key overrides default
+  // When using proxy, no key needed in browser
+  if (WIDGET_CONFIG.USE_PROXY) return 'proxy';
   return localStorage.getItem('openrouter_api_key') || WIDGET_CONFIG.OPENROUTER_API_KEY || '';
 }
 
@@ -130,14 +134,18 @@ const FALLBACK_MODELS = [
 ];
 
 async function tryModelRequest(apiKey, model, messages) {
-  const response = await fetch(WIDGET_CONFIG.API_URL, {
+  const url = WIDGET_CONFIG.USE_PROXY ? WIDGET_CONFIG.PROXY_URL : WIDGET_CONFIG.API_URL;
+  const headers = { 'Content-Type': 'application/json' };
+
+  if (!WIDGET_CONFIG.USE_PROXY) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+    headers['HTTP-Referer'] = WIDGET_CONFIG.SITE_URL;
+    headers['X-Title'] = WIDGET_CONFIG.SITE_NAME;
+  }
+
+  const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': WIDGET_CONFIG.SITE_URL,
-      'X-Title': WIDGET_CONFIG.SITE_NAME
-    },
+    headers: headers,
     body: JSON.stringify({
       model: model,
       messages: messages,

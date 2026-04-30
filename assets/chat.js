@@ -55,6 +55,9 @@ Always be helpful, specific, and Pakistani-context aware.`;
 
 // Configuration
 const CONFIG = {
+  // Cloudflare Worker proxy. API key safely on server side.
+  USE_PROXY: true,
+  PROXY_URL: 'https://talha-ai-proxy.themeknock.workers.dev',
   OPENROUTER_API_KEY: '',
   MODEL: 'openai/gpt-oss-120b:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
@@ -70,7 +73,7 @@ let isLoading = false;
 
 // Load API key from localStorage if exists
 function getApiKey() {
-  // localStorage takes priority over hardcoded default
+  if (CONFIG.USE_PROXY) return 'proxy';
   return localStorage.getItem('openrouter_api_key') || CONFIG.OPENROUTER_API_KEY || '';
 }
 
@@ -172,14 +175,18 @@ function hideTyping() {
 }
 
 async function tryFullModelRequest(apiKey, model, messages) {
-  const response = await fetch(CONFIG.API_URL, {
+  const url = CONFIG.USE_PROXY ? CONFIG.PROXY_URL : CONFIG.API_URL;
+  const headers = { 'Content-Type': 'application/json' };
+
+  if (!CONFIG.USE_PROXY) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+    headers['HTTP-Referer'] = CONFIG.SITE_URL;
+    headers['X-Title'] = CONFIG.SITE_NAME;
+  }
+
+  const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': CONFIG.SITE_URL,
-      'X-Title': CONFIG.SITE_NAME
-    },
+    headers: headers,
     body: JSON.stringify({
       model: model,
       messages: messages,

@@ -33,6 +33,7 @@ const NAV_STRUCTURE = [
     title: 'AI Se Banao',
     items: [
       { href: '/pages/build-apps.html', icon: '📱', label: 'Apps Banao' },
+      { href: '/pages/deploy-guide.html', icon: '⚡', label: 'VS Code + Deploy' },
       { href: '/pages/image-generation.html', icon: '🎨', label: 'Image Generation' },
       { href: '/pages/free-hosting.html', icon: '🌐', label: 'Free Hosting' },
       { href: '/pages/prompts-library.html', icon: '📚', label: 'Prompts Library' },
