@@ -24,10 +24,7 @@ Pricing context:
 Stay focused on AI/freelancing/earning topics. Politely redirect if asked about politics, religion, personal matters, harmful content.`;
 
 const WIDGET_CONFIG = {
-  // To enable shared API key for all visitors, paste your OpenRouter key here.
-  // Get free key: https://openrouter.ai/keys
-  // Leave empty to require each user to enter their own key.
-  OPENROUTER_API_KEY: '',
+  OPENROUTER_API_KEY: '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',
   MODEL: 'google/gemini-2.0-flash-exp:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 800,

@@ -55,9 +55,7 @@ Always be helpful, specific, and Pakistani-context aware.`;
 
 // Configuration
 const CONFIG = {
-  // Paste your OpenRouter API key here for shared access
-  // Get free key: https://openrouter.ai/keys
-  OPENROUTER_API_KEY: '',
+  OPENROUTER_API_KEY: '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',
   MODEL: 'google/gemini-2.0-flash-exp:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 1000,
