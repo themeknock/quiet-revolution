@@ -1068,8 +1068,8 @@
     color: var(--muted);
   }
 
-  /* Reveal animation classes */
-  .reveal { opacity: 0; }
+  /* Reveal animation classes - GSAP handles initial state via gsap.set() */
+  .reveal { will-change: transform, opacity; }
 </style>
 </head>
 <body>
@@ -1604,20 +1604,32 @@ function animateCounters() {
 }
 setTimeout(animateCounters, 800);
 
-// SCROLL TRIGGERS
+// SCROLL TRIGGERS - set initial state then animate to visible
+gsap.set('.reveal', { y: 40, opacity: 0 });
 gsap.utils.toArray('.reveal').forEach(el => {
-  gsap.from(el, {
-    y: 40,
-    opacity: 0,
+  gsap.to(el, {
+    y: 0,
+    opacity: 1,
     duration: 0.8,
     ease: 'power3.out',
     scrollTrigger: {
       trigger: el,
-      start: 'top 85%',
+      start: 'top 88%',
       toggleActions: 'play none none none'
     }
   });
 });
+
+// SAFETY FALLBACK: ensure everything visible if GSAP/ScrollTrigger fails
+setTimeout(() => {
+  document.querySelectorAll('.reveal').forEach(el => {
+    const opacity = window.getComputedStyle(el).opacity;
+    if (parseFloat(opacity) < 0.1) {
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }
+  });
+}, 3000);
 
 // Talha card mouse tilt effect
 const talhaCard = document.getElementById('talha-card');
