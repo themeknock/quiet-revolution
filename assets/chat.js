@@ -152,7 +152,8 @@ function showTyping() {
   const div = document.createElement('div');
   div.className = 'chat-msg bot pulse';
   div.id = 'typing-indicator';
-  div.innerHTML = '<p>Talha soch raha hai...</p>';
+  div.className = 'chat-msg bot typing';
+  div.innerHTML = '<span></span><span></span><span></span>';
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
 }

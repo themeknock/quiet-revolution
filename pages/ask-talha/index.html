@@ -6,28 +6,103 @@
 <title>Ask Talha (AI), Talha's AI Guide</title>
 <link rel="stylesheet" href="../../assets/styles.css" />
 <style>
-  /* Chat-specific styles */
-  .chat-page {
+  /* Full-screen chat experience */
+  body {
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .app {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .sidebar {
+    height: 100vh;
+    height: 100dvh;
+  }
+
+  .main {
+    padding: 0;
     display: flex;
     flex-direction: column;
-    height: 100%;
-    max-width: 800px;
-    margin: 0 auto;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
   }
 
   .chat-page-header {
-    text-align: center;
-    margin-bottom: 24px;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--line);
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
   }
+  .chat-avatar {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .chat-avatar-info { flex: 1; min-width: 0; }
+  .chat-avatar-info .name {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .chat-avatar-info .status {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+  }
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #4ade80;
+  }
+  .chat-clear-btn {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .chat-clear-btn:hover { color: var(--orange); }
 
-  .chat-suggestions {
+  .chat-suggestions-bar {
+    padding: 12px 16px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
-    padding: 16px;
-    border-bottom: 1px solid var(--line);
-    background: var(--surface);
+    flex-shrink: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .chat-suggestions-bar::-webkit-scrollbar { display: none; }
 
   .suggestion-chip {
     padding: 8px 14px;
@@ -40,37 +115,123 @@
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 500;
   }
-
   .suggestion-chip:hover {
     border-color: var(--green);
     color: var(--green);
     background: var(--green-light);
   }
 
-  .chat-toolbar {
+  .chat-messages-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 16px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chat-msg {
+    max-width: 85%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  .chat-msg p { margin: 0 0 6px; }
+  .chat-msg p:last-child { margin-bottom: 0; }
+  .chat-msg.user {
+    align-self: flex-end;
+    background: var(--green);
+    color: white;
+    border-bottom-right-radius: 6px;
+  }
+  .chat-msg.bot {
+    align-self: flex-start;
+    background: white;
+    border: 1px solid var(--line);
+    color: var(--text);
+    border-bottom-left-radius: 6px;
+  }
+  .chat-msg.bot strong { color: var(--green-dark); }
+  .chat-msg.bot ul, .chat-msg.bot ol { padding-left: 22px; margin: 6px 0; }
+  .chat-msg.bot li { font-size: 14px; margin-bottom: 4px; }
+  .chat-msg.bot a { color: var(--green); font-weight: 600; }
+
+  .chat-msg.bot.typing {
+    padding: 14px 18px;
+    display: flex;
+    gap: 5px;
+  }
+  .chat-msg.bot.typing span {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: typing-bounce 1.2s infinite;
+  }
+  .chat-msg.bot.typing span:nth-child(2) { animation-delay: 0.2s; }
+  .chat-msg.bot.typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing-bounce {
+    0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+    30% { opacity: 1; transform: translateY(-4px); }
+  }
+
+  .chat-input-bar {
+    padding: 12px 16px;
+    background: white;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 8px;
     align-items: center;
-    padding: 12px 20px;
-    background: var(--surface-2);
-    border-bottom: 1px solid var(--line);
-    font-size: 12px;
-    color: var(--muted);
+    flex-shrink: 0;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
   }
-
-  .chat-clear {
-    background: none;
-    border: none;
-    color: var(--muted);
-    cursor: pointer;
+  .chat-input-field {
+    flex: 1;
+    padding: 12px 18px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
     font-family: inherit;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: var(--surface);
   }
+  .chat-input-field:focus {
+    border-color: var(--green);
+    background: white;
+  }
+  .chat-send-btn {
+    width: 46px;
+    height: 46px;
+    background: var(--green);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .chat-send-btn:hover { background: var(--green-dark); }
+  .chat-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .chat-clear:hover { color: var(--orange); background: rgba(232,93,32,0.05); }
+  /* MOBILE - full screen, no sidebar */
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { height: 100vh; height: 100dvh; }
+    .chat-page-header { padding: 12px 16px; }
+    .chat-msg { max-width: 88%; font-size: 14px; }
+    .suggestion-chip { font-size: 12px; padding: 7px 12px; }
+  }
 
   /* API Key Modal */
   .modal-overlay {
@@ -78,38 +239,31 @@
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
     z-index: 1000;
     align-items: center;
     justify-content: center;
     padding: 20px;
   }
-
   .modal {
     background: white;
-    padding: 32px;
-    border-radius: var(--radius-lg);
-    max-width: 480px;
+    padding: 28px;
+    border-radius: 16px;
+    max-width: 420px;
     width: 100%;
-    box-shadow: var(--shadow-lg);
   }
-
-  .modal h3 {
-    margin-top: 0;
-    margin-bottom: 12px;
-  }
-
-  .modal .modal-input {
+  .modal h3 { margin: 0 0 8px; }
+  .modal-input {
     width: 100%;
-    padding: 12px 16px;
+    padding: 12px 14px;
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: 10px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     margin: 12px 0;
     outline: none;
+    box-sizing: border-box;
   }
-
-  .modal .modal-input:focus { border-color: var(--green); }
 </style>
 </head>
 <body>
@@ -119,71 +273,41 @@
 
   <main class="main">
 
-    <div class="chat-page">
-
-      <div class="chat-page-header fade-up">
-        <div class="page-tag">AI Assistant · 24/7</div>
-        <h1>Ask Talha (AI)</h1>
-        <p class="lead" style="font-size: 16px; margin: 8px auto 0;">
-          Mera AI version hai yeh, tumhare har sawaal ka jawab dega, mere style mein.
-        </p>
+    <!-- HEADER -->
+    <div class="chat-page-header">
+      <div class="chat-avatar">T</div>
+      <div class="chat-avatar-info">
+        <div class="name">AI Talha</div>
+        <div class="status"><span class="status-dot"></span>Online · 24/7</div>
       </div>
-
-      <div class="chat-container fade-up">
-
-        <div class="chat-toolbar">
-          <span>💬 Roman Urdu mein bolo · Long-form jawab milega</span>
-          <button class="chat-clear" id="chatClear">Clear chat</button>
-        </div>
-
-        <div class="chat-suggestions" id="chatSuggestions"></div>
-
-        <div class="chat-messages" id="chatMessages"></div>
-
-        <div class="chat-input-row">
-          <input
-            type="text"
-            id="chatInput"
-            class="chat-input"
-            placeholder="Apna sawaal yahan likho..."
-            autocomplete="off"
-          />
-          <button id="chatSend" class="chat-send">Send</button>
-        </div>
-
-      </div>
-
-      <p class="muted center" style="font-size: 12px; margin-top: 16px;">
-        Powered by OpenRouter · DeepSeek · Made by Talha Tariq
-      </p>
-
+      <button class="chat-clear-btn" id="chatClear" title="Clear chat">⟲</button>
     </div>
 
-    <!-- API Key Modal -->
+    <!-- SUGGESTIONS BAR (horizontal scroll) -->
+    <div class="chat-suggestions-bar" id="chatSuggestions"></div>
+
+    <!-- MESSAGES -->
+    <div class="chat-messages-area" id="chatMessages"></div>
+
+    <!-- INPUT -->
+    <div class="chat-input-bar">
+      <input type="text" id="chatInput" class="chat-input-field" placeholder="Apna sawaal yahan likho..." autocomplete="off" />
+      <button id="chatSend" class="chat-send-btn" aria-label="Send">↑</button>
+    </div>
+
+    <!-- API KEY MODAL -->
     <div class="modal-overlay" id="apiKeyModal">
       <div class="modal">
-        <h3>OpenRouter API Key Chahiye</h3>
-        <p class="muted">
-          Yeh chat OpenRouter ke through chalti hai. Free API key chahiye:
+        <h3>API Key Chahiye</h3>
+        <p style="font-size: 13px; color: var(--muted); margin: 0 0 12px;">
+          OpenRouter free key le lo:
         </p>
-        <ol style="padding-left: 20px; font-size: 14px;">
-          <li><a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> pe jao</li>
-          <li>Sign up karo (free)</li>
-          <li>"Create Key" se naya key banao</li>
-          <li>Yahan paste karo:</li>
+        <ol style="padding-left: 18px; font-size: 13px; margin: 0 0 8px;">
+          <li><a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a></li>
+          <li>"Create Key", paste below</li>
         </ol>
-        <input
-          type="password"
-          id="apiKeyInput"
-          class="modal-input"
-          placeholder="sk-or-v1-..."
-        />
-        <div class="btn-row">
-          <button class="btn" onclick="saveApiKeyFromModal()">Save Key</button>
-        </div>
-        <p class="muted" style="font-size: 12px; margin-top: 12px; margin-bottom: 0;">
-          Key sirf tumhare browser mein save hoti hai (localStorage). Server pe nahi jaati.
-        </p>
+        <input type="password" id="apiKeyInput" class="modal-input" placeholder="sk-or-v1-..." />
+        <button class="btn" onclick="saveApiKeyFromModal()" style="width:100%;">Save</button>
       </div>
     </div>
 
@@ -191,7 +315,6 @@
 </div>
 
 <script src="../../assets/components.js"></script>
-<script src="../../assets/chat-widget.js"></script>
 <script src="../../assets/chat.js"></script>
 </body>
 </html>
