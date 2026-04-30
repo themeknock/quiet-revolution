@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ask Talha (AI), The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  /* Chat-specific styles */
+  .chat-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .chat-page-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .chat-suggestions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+
+  .suggestion-chip {
+    padding: 8px 14px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .suggestion-chip:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: var(--green-light);
+  }
+
+  .chat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .chat-clear {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+
+  .chat-clear:hover { color: var(--orange); background: rgba(232,93,32,0.05); }
+
+  /* API Key Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .modal {
+    background: white;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    max-width: 480px;
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .modal h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+
+  .modal .modal-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    margin: 12px 0;
+    outline: none;
+  }
+
+  .modal .modal-input:focus { border-color: var(--green); }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="chat-page">
+
+      <div class="chat-page-header fade-up">
+        <div class="page-tag">AI Assistant · 24/7</div>
+        <h1>Ask Talha (AI)</h1>
+        <p class="lead" style="font-size: 16px; margin: 8px auto 0;">
+          Mera AI version hai yeh, tumhare har sawaal ka jawab dega, mere style mein.
+        </p>
+      </div>
+
+      <div class="chat-container fade-up">
+
+        <div class="chat-toolbar">
+          <span>💬 Roman Urdu mein bolo · Long-form jawab milega</span>
+          <button class="chat-clear" id="chatClear">Clear chat</button>
+        </div>
+
+        <div class="chat-suggestions" id="chatSuggestions"></div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="chat-input-row">
+          <input
+            type="text"
+            id="chatInput"
+            class="chat-input"
+            placeholder="Apna sawaal yahan likho..."
+            autocomplete="off"
+          />
+          <button id="chatSend" class="chat-send">Send</button>
+        </div>
+
+      </div>
+
+      <p class="muted center" style="font-size: 12px; margin-top: 16px;">
+        Powered by OpenRouter · DeepSeek · Made by Talha Tariq
+      </p>
+
+    </div>
+
+    <!-- API Key Modal -->
+    <div class="modal-overlay" id="apiKeyModal">
+      <div class="modal">
+        <h3>OpenRouter API Key Chahiye</h3>
+        <p class="muted">
+          Yeh chat OpenRouter ke through chalti hai. Free API key chahiye:
+        </p>
+        <ol style="padding-left: 20px; font-size: 14px;">
+          <li><a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> pe jao</li>
+          <li>Sign up karo (free)</li>
+          <li>"Create Key" se naya key banao</li>
+          <li>Yahan paste karo:</li>
+        </ol>
+        <input
+          type="password"
+          id="apiKeyInput"
+          class="modal-input"
+          placeholder="sk-or-v1-..."
+        />
+        <div class="btn-row">
+          <button class="btn" onclick="saveApiKeyFromModal()">Save Key</button>
+        </div>
+        <p class="muted" style="font-size: 12px; margin-top: 12px; margin-bottom: 0;">
+          Key sirf tumhare browser mein save hoti hai (localStorage). Server pe nahi jaati.
+        </p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+<script src="../assets/chat.js"></script>
+</body>
+</html>

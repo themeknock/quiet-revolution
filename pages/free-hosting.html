@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Hosting, The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  .logo-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin: 8px 8px 8px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .logo-card img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+  }
+  .logo-card-text {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 15px;
+  }
+  .logo-card-tag {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .visual-step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 20px;
+    align-items: start;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 16px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .visual-step-num {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .visual-step-content h3 {
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+  .visual-step-tools {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .visual-step-tools img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+  .browser-frame {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: var(--shadow-md);
+  }
+  .browser-bar {
+    background: var(--surface-2);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .browser-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .browser-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+  }
+  .browser-dot.r { background: #ff5f56; }
+  .browser-dot.y { background: #ffbd2e; }
+  .browser-dot.g { background: #27c93f; }
+  .browser-url {
+    background: white;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    flex: 1;
+    border: 1px solid var(--line);
+  }
+  .browser-content {
+    padding: 24px;
+    background: white;
+    min-height: 120px;
+  }
+  .browser-action {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .mcp-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 24px 0;
+  }
+  .mcp-box {
+    background: white;
+    border: 2px solid var(--green);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+  }
+  .mcp-box img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
+  }
+  .mcp-arrow {
+    font-size: 24px;
+    color: var(--green);
+  }
+  @media (max-width: 700px) {
+    .mcp-flow { grid-template-columns: 1fr; }
+    .mcp-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Free Hosting · Apni App Live Karo</div>
+      <h1>Apni Website Free Mein Live Karo</h1>
+      <p class="lead">
+        Sirf <strong>GitHub</strong>. Bas. Yahi ek tool kaafi hai. Free forever, professional URL, auto-deploy.
+        Koi credit card, koi extra signup, koi technical setup nahi.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>Sirf Ek Tool Chahiye</h2>
+      <p>Internet pe 100 hosting options hain. Beginner ke liye sabse simple yahi hai:</p>
+      <div>
+        <div class="logo-card">
+          <img src="https://logo.clearbit.com/github.com" alt="GitHub" onerror="this.style.display='none'" />
+          <div>
+            <div class="logo-card-text">GitHub Pages</div>
+            <div class="logo-card-tag">Code + Hosting · Free Forever</div>
+          </div>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Kyun GitHub Pages?</strong></p>
+        <ul>
+          <li>Sirf 1 account banana, koi extra service nahi</li>
+          <li>Free professional URL: <code>username.github.io/project</code></li>
+          <li>Code update karo, automatically live ho jaata hai</li>
+          <li>Custom domain bhi connect kar sakte ho baad mein</li>
+          <li>Bilkul free, hamesha ke liye</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Step 1, GitHub Account Banao</h2>
+
+      <div class="visual-step">
+        <div class="visual-step-num">1</div>
+        <div class="visual-step-content">
+          <h3>Sign Up</h3>
+          <p><a href="https://github.com/signup" target="_blank">github.com/signup</a> pe jao.</p>
+          <ul>
+            <li><strong>Email:</strong> apna Gmail use karo</li>
+            <li><strong>Password:</strong> strong banao</li>
+            <li><strong>Username:</strong> simple, professional. Example: <code>talha-ai</code> (yeh tumhara public name hoga)</li>
+            <li>Free plan select karo</li>
+            <li>Email verify karo, done</li>
+          </ul>
+          <p><a href="https://github.com/signup" target="_blank" class="btn btn-outline">github.com Open Karo →</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Step 2, Apna Pehla Repository Banao</h2>
+
+      <div class="visual-step">
+        <div class="visual-step-num">1</div>
+        <div class="visual-step-content">
+          <h3>"+" Icon, "New repository"</h3>
+          <p>GitHub mein top-right corner pe "+" icon hai, click karo, "New repository":</p>
+          <ul>
+            <li><strong>Repository name:</strong> apni app ka naam (e.g., <code>my-website</code>)</li>
+            <li><strong>Public</strong> select karo (zaroori hai for free hosting)</li>
+            <li><strong>"Add a README file"</strong> tick karo</li>
+            <li>"Create repository" click</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Step 3, Apna Code Upload Karo</h2>
+
+      <div class="visual-step">
+        <div class="visual-step-num">1</div>
+        <div class="visual-step-content">
+          <h3>Drag & Drop, Sabse Easy</h3>
+          <p>Repository page pe:</p>
+          <ul>
+            <li>"Add file" button click</li>
+            <li>"Upload files" select</li>
+            <li>Apni HTML/CSS/JS files browser mein drag karo</li>
+            <li>Bottom mein commit message likho (e.g., "Initial upload")</li>
+            <li>"Commit changes" click</li>
+          </ul>
+          <p>Code GitHub pe live ho gaya.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>Note:</strong> Apni HTML file ka naam <code>index.html</code> rakhna zaroori hai. Yahi default page hota hai jo browser mein khulta hai.</p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Step 4, GitHub Pages Enable Karo</h2>
+
+      <div class="visual-step">
+        <div class="visual-step-num">1</div>
+        <div class="visual-step-content">
+          <h3>Settings, Pages</h3>
+          <p>Apne repository mein:</p>
+          <ul>
+            <li>Top mein <strong>"Settings"</strong> tab pe click</li>
+            <li>Left sidebar mein <strong>"Pages"</strong> click</li>
+            <li>"Source" section mein dropdown:
+              <ul>
+                <li>Branch: <code>main</code> select karo</li>
+                <li>Folder: <code>/ (root)</code> select karo</li>
+              </ul>
+            </li>
+            <li><strong>"Save"</strong> button click</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="visual-step">
+        <div class="visual-step-num">2</div>
+        <div class="visual-step-content">
+          <h3>1, 2 Minute Wait Karo</h3>
+          <p>GitHub apne aap deploy karega. Same Pages page pe refresh karo, top mein link aa jayega:</p>
+
+          <div class="browser-frame">
+            <div class="browser-bar">
+              <div class="browser-dots">
+                <div class="browser-dot r"></div>
+                <div class="browser-dot y"></div>
+                <div class="browser-dot g"></div>
+              </div>
+              <div class="browser-url">talha-ai.github.io/my-website</div>
+            </div>
+            <div class="browser-content">
+              <p style="margin: 0; color: var(--green); font-weight: 700;">✓ Your site is live</p>
+              <p style="font-size: 14px; color: var(--muted); margin: 8px 0 16px;">Yeh tumhari permanent URL hai. Free forever.</p>
+              <span class="browser-action">Visit Site</span>
+            </div>
+          </div>
+          <p>Bas, tumhari website ab internet pe live hai. <strong>Free. Hamesha ke liye.</strong></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Step 5, Update Karna Hai? Easy.</h2>
+      <p>Code change karna hai? Just upload again:</p>
+      <ul>
+        <li>Repository pe jao</li>
+        <li>File click karo, edit (pencil icon)</li>
+        <li>Ya naye files upload karo</li>
+        <li>"Commit changes" click</li>
+        <li>30 second mein automatically live update</li>
+      </ul>
+      <p>Magic part: <strong>code change karte hi website auto-update hoti hai.</strong></p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Bonus, Custom Domain (Optional)</h2>
+      <p>Default URL <code>talha-ai.github.io/my-website</code> kaam ka hai, lekin agar professional chahiye toh apna domain le sakte ho:</p>
+
+      <h3>Free Domain (Limited)</h3>
+      <ul>
+        <li><strong>username.github.io</strong>, ek free subdomain hamesha milta hai</li>
+        <li>Repo ka naam exactly <code>username.github.io</code> rakho, automatic ban jaata hai</li>
+      </ul>
+
+      <h3>Paid Custom Domain (Recommended)</h3>
+      <ul>
+        <li><strong>Namecheap</strong>, <a href="https://namecheap.com" target="_blank">namecheap.com</a>, ~$10/year .com</li>
+        <li><strong>Cloudflare</strong>, <a href="https://cloudflare.com" target="_blank">cloudflare.com</a>, cheapest renewals</li>
+      </ul>
+
+      <h3>Connect Karo GitHub Se</h3>
+      <ol>
+        <li>GitHub repo, Settings, Pages</li>
+        <li>"Custom domain" mein apna domain type karo</li>
+        <li>Domain provider pe DNS records add karo (GitHub ke instructions follow karo)</li>
+        <li>10 minute mein active</li>
+      </ol>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Bonus, Claude MCP Setup (Game Changer)</h2>
+      <p>
+        Yeh sabse insane part hai. <strong>MCP (Model Context Protocol)</strong>, Claude ko directly tools se connect karne ka tarika.
+        Setup karne ke baad, Claude khud GitHub manage karta hai, code likhta hai, push karta hai, sab.
+      </p>
+
+      <div class="callout">
+        <p><strong>Iska matlab?</strong> Tum bolte ho: <em>"Claude, mera latest project deploy kar do."</em>, Claude khud GitHub pe push karta hai, deploy hota hai, live link tumhe deta hai. <strong>Tumhe kuch nahi karna.</strong></p>
+      </div>
+
+      <div class="mcp-flow">
+        <div class="mcp-box">
+          <img src="https://logo.clearbit.com/claude.ai" alt="Claude" onerror="this.style.display='none'" />
+          <div style="font-weight: 700; color: var(--text);">Claude</div>
+          <div style="font-size: 12px; color: var(--muted);">Tum bolo</div>
+        </div>
+        <div class="mcp-arrow">→</div>
+        <div class="mcp-box">
+          <img src="https://logo.clearbit.com/github.com" alt="GitHub" onerror="this.style.display='none'" />
+          <div style="font-weight: 700; color: var(--text);">GitHub</div>
+          <div style="font-size: 12px; color: var(--muted);">Sab handle</div>
+        </div>
+      </div>
+
+      <h3>MCP Setup, Step By Step</h3>
+
+      <div class="visual-step">
+        <div class="visual-step-num">1</div>
+        <div class="visual-step-content">
+          <h3>Claude Desktop App Install Karo</h3>
+          <p>MCP sirf Claude Desktop app mein chalti hai, browser version mein nahi.</p>
+          <ul>
+            <li><a href="https://claude.ai/download" target="_blank">claude.ai/download</a> pe jao</li>
+            <li>Mac/Windows ke liye download karo</li>
+            <li>Install karo, sign in karo</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="visual-step">
+        <div class="visual-step-num">2</div>
+        <div class="visual-step-content">
+          <h3>GitHub Token Banao</h3>
+          <p>GitHub pe jao, Settings, Developer Settings, Personal Access Tokens, "Generate New Token":</p>
+          <ul>
+            <li>Naam: <code>claude-mcp</code></li>
+            <li>Scopes: <code>repo</code>, <code>workflow</code> tick karo</li>
+            <li>Token copy karo, sirf ek baar dikhayega</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="visual-step">
+        <div class="visual-step-num">3</div>
+        <div class="visual-step-content">
+          <h3>Claude Mein Connect Karo</h3>
+          <p>Claude Desktop, Settings, "Connectors", "Add MCP Server":</p>
+          <ul>
+            <li>Server type: <strong>GitHub</strong></li>
+            <li>Token: paste karo</li>
+            <li>"Connect" click</li>
+          </ul>
+          <p>Done, Claude ab tumhare GitHub repos manage kar sakta hai.</p>
+        </div>
+      </div>
+
+      <div class="visual-step">
+        <div class="visual-step-num">4</div>
+        <div class="visual-step-content">
+          <h3>Test Karo</h3>
+          <p>Claude ko yeh prompt do:</p>
+          <div class="prompt-box">
+            <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+            <div class="prompt-text">Mere GitHub repos list karo. Phir "my-website" repo mein index.html ka content read karke summary do.</div>
+          </div>
+          <p>Claude direct GitHub se data lega aur jawab dega. <strong>Ab tum kuch bhi keh sakte ho:</strong></p>
+          <ul>
+            <li>"Mera new repo banao 'salon-booking'"</li>
+            <li>"Index.html mein hero section update karo"</li>
+            <li>"Commit aur push karo"</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Real Workflow, ThemeKnock Mein</h2>
+      <div class="callout">
+        <p><strong>Subah 9 baje:</strong></p>
+        <p>Claude ko bolta hoon: <em>"Salon ke liye booking system banao. Customer name, phone, service, date, time slot. Modern design. Green theme."</em></p>
+        <p><strong>Claude:</strong></p>
+        <ul>
+          <li>Code likhta hai</li>
+          <li>GitHub pe new repo banata hai</li>
+          <li>Code push karta hai</li>
+          <li>GitHub Pages enable kar deta hai</li>
+          <li>Live URL deta hai</li>
+        </ul>
+        <p><strong>9:30 baje:</strong> Client ko link bhej deta hoon. Done.</p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Common Issues + Fixes</h2>
+      <ul>
+        <li><strong>Site nahi khul rahi:</strong> Repo public hai? Settings mein check karo.</li>
+        <li><strong>404 Error:</strong> File ka naam <code>index.html</code> hai? Lowercase mein?</li>
+        <li><strong>CSS load nahi ho rahi:</strong> File paths relative hain, absolute nahi (e.g., <code>style.css</code> not <code>/style.css</code>).</li>
+        <li><strong>Update reflect nahi ho rahi:</strong> 1, 2 minute wait karo. Phir browser cache clear karo (Ctrl+Shift+R).</li>
+        <li><strong>Custom domain not working:</strong> 10, 30 minute wait. DNS propagation slow hota hai.</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Summary, Yaad Rakho</h2>
+      <ol>
+        <li><strong>GitHub account banao</strong>, free</li>
+        <li><strong>Repository banao</strong>, public</li>
+        <li><strong>Code upload karo</strong>, drag & drop</li>
+        <li><strong>Settings, Pages, Save</strong>, live ho jata hai</li>
+        <li><strong>Claude MCP setup karo</strong>, ab Claude khud sab kaam kare</li>
+      </ol>
+      <div class="callout">
+        <p><strong>Total cost:</strong> $0/mo. Custom domain optional, ~Rs. 300/mo.</p>
+        <p><strong>Time investment:</strong> Pehli baar 30 minute. Phir lifetime ke liye automated.</p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Next Step</h2>
+      <p>Hosting samjh aaya? Acha. Ab <strong>actual app banao</strong> Claude ke saath.</p>
+      <div class="btn-row">
+        <a href="build-apps.html" class="btn">Apps Banao →</a>
+        <a href="ask-talha.html" class="btn btn-outline">💬 Ask Talha</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

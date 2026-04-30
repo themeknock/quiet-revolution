@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prompts Library, The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Resource · Copy-Paste Ready</div>
+      <h1>Prompts Library</h1>
+      <p class="lead">
+        50+ ready-to-use prompts. Copy karo, claude.ai pe paste karo, [brackets] mein apni details daalo. Done.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>🎯 Getting Started</h2>
+
+      <h3>Pehla Prompt, Personalized Roadmap</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Main [age] saal ka student hoon, [city] Pakistan se. Mere paas [skills] basic skills hain. Online paise kamana chahta hoon. Mahine ka [target amount] kamana hai pehla goal. Step-by-step 90-day roadmap banao. Roman Urdu mein. Specific tools aur actions list karo.</div>
+      </div>
+
+      <h3>Claude Se Sikho, Personal Tutor</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe [topic] seekhna hai zero se. Main bilkul beginner hoon. 7-day learning plan banao, daily 30 minute. Practical, hands-on. Examples Pakistani context mein.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>📝 Content Writing</h2>
+
+      <h3>Social Media Captions Pakistani Brand</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe ek Pakistani [business type] ke liye Instagram captions chahiye.
+
+Brand: [name]
+About: [description]
+Target: [audience]
+Tone: [casual/formal/funny]
+
+20 captions banao, yeh mix:
+- 5 product/service highlights
+- 5 educational tips for audience
+- 5 engagement posts (questions/polls)
+- 5 lifestyle/relatable posts
+
+Each: 80-120 words. 10 hashtags per post. Roman Urdu mein casual.</div>
+      </div>
+
+      <h3>SEO Blog Post</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek SEO-optimized blog post likho. Topic: [topic]. Target keyword: [keyword]. Word count: 1500. Audience: [audience]. Tone: professional but friendly. Structure: H1 title, intro hook, 5 H2 sections, conclusion with CTA. Meta description bhi do.</div>
+      </div>
+
+      <h3>Email Marketing</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek promotional email likho. Brand: [brand]. Offer: [offer details]. Target: [audience]. Goal: [click/buy/sign-up]. Length: 200-300 words. Subject line bhi do, 5 variations. Preheader bhi.</div>
+      </div>
+
+      <h3>YouTube Script</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek YouTube video script likho. Topic: [topic]. Length: 8-10 minute. Style: educational with personality. Audience: [audience]. Structure: hook (15 sec), intro (30 sec), 3 main points with examples, summary, CTA. Roman Urdu+English mix.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>💼 Freelancing</h2>
+
+      <h3>Fiverr Gig Description</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mera Fiverr gig hai "[gig title]". Description likho, 1200 characters. Structure: hook, problem buyer faces, my solution, what's included (bullets), why choose me (3 reasons), call-to-action. Friendly aur confident tone.</div>
+      </div>
+
+      <h3>Upwork Cover Letter</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek Upwork proposal likho is job ke liye:
+[paste full job description]
+
+Mera background: [your skills/experience]
+
+Rules:
+- 250 words max
+- Personalized, generic nahi
+- Buyer ke specific pain points address karo
+- 3 specific solutions propose karo
+- 1 thoughtful question end mein
+- Pricing mention karo: [your rate]</div>
+      </div>
+
+      <h3>Client Response Template</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Client ne yeh message bheja: "[paste client message]"
+
+Mujhe professional response likhna hai. Yeh address karo:
+- [points to address]
+
+Tone: friendly, professional. American English. 100-200 words. Reassure karo unhe ke main capable hoon.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>💻 Code & Apps</h2>
+
+      <h3>Simple Web App</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe ek simple web app banao, [app name].
+
+Features:
+- [feature 1]
+- [feature 2]
+- [feature 3]
+
+Tech: Single HTML file (HTML + CSS + JS). Modern dark theme. Mobile responsive. No external libraries. Self-contained.
+
+Comments add karo har section mein taake mein samajh sakoon.</div>
+      </div>
+
+      <h3>Bug Fix Help</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Yeh code hai:
+[paste code]
+
+Yeh error aa raha hai:
+[paste error]
+
+Help karo fix karne mein. Bata kya problem hai aur kaise solve karna hai. Step-by-step.</div>
+      </div>
+
+      <h3>Code Improvement</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Yeh code review karo aur improve karo:
+[paste code]
+
+Yeh dekho:
+- Performance better ho sakta hai?
+- Cleaner code likh sakte ho?
+- Best practices follow ho rahi hain?
+- Bugs ya security issues hain?
+
+Improved version do with explanation kya badla.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>🎨 Design & Images</h2>
+
+      <h3>Image Prompt Generator</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe AI image generator (Midjourney/Flow) ke liye prompt chahiye. Image kya banwana hai:
+
+Concept: [describe image]
+Style: [photo / illustration / 3D / anime]
+Mood: [happy / dramatic / calm]
+Colors: [color preferences]
+
+Prompt likho, detailed, structured, professional. Camera details, lighting, composition mention karo. 100-150 words.</div>
+      </div>
+
+      <h3>Logo Brief</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek brand ka logo concept brief banao:
+
+Brand: [name]
+Industry: [industry]
+Audience: [target]
+Vibe: [modern/vintage/minimal/bold]
+Colors preference: [colors]
+
+5 logo direction concepts do, text describe karo har ek. Phir best 1 select karo with reasoning. Image generation ke liye prompt bhi do.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>🎓 Learning</h2>
+
+      <h3>Concept Explainer</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe samjhao [concept]. Main beginner hoon. Simple Roman Urdu mein. Real-life example use karo Pakistani context se. ELI5 (explain like I'm 5) approach.</div>
+      </div>
+
+      <h3>Practice Questions</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe [topic] ki practice chahiye. 10 questions banao with increasing difficulty. Pehle simple, baad mein hard. Answers separately do at the end. Pakistani exam style.</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>📊 Business & Analysis</h2>
+
+      <h3>Market Research</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">[Industry/niche] Pakistan mein analyze karo. Yeh batao:
+- Market size aur growth
+- Top 5 competitors
+- Customer demographics
+- Common pain points
+- Pricing trends
+- Opportunity gaps
+
+Source data dikhao agar possible. Pakistani context specific.</div>
+      </div>
+
+      <h3>Business Plan</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek simple business plan banao:
+
+Business: [name + type]
+Location: [city]
+Target customer: [audience]
+Initial budget: [amount]
+
+Yeh include karo:
+- Executive summary (100 words)
+- Service/product details
+- Pricing strategy
+- Marketing plan (3 channels)
+- 6-month financial projection
+- Risks aur mitigation</div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>💬 Communication</h2>
+
+      <h3>Cold Outreach Email</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek cold email likho [target person] ko. Goal: [meeting/freelance gig/partnership]. Subject line bhi do, 3 variations. Body: 100-150 words. Tone: professional, friendly. Their pain point address karo. Soft CTA. Personalized hona chahiye, generic nahi.</div>
+      </div>
+
+      <h3>Social Media DM</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Ek DM template likho Pakistani brands ko Instagram pe. Goal: content writing services pitch karna. 80 words max. Friendly opener, value pitch, clear pricing, low-pressure CTA. 3 variations do.</div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Apne Prompts Banao</h2>
+      <div class="callout">
+        <p><strong>Best prompts khud experience se aate hain.</strong> Jo prompts achi work karein, note app mein save karo. 1 mahine baad tumhari personal library ban jayegi.</p>
+        <p>Aur agar koi specific situation pe stuck ho, <a href="ask-talha.html">Ask Talha (AI)</a> pe pucho. Custom prompt mil jayega.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

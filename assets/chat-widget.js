@@ -1,0 +1,614 @@
+// ============================================
+// FLOATING AI CHAT WIDGET
+// Available on every page
+// ============================================
+
+const WIDGET_SYSTEM_PROMPT = `You are "AI Talha", a virtual version of Talha Tariq, founder of ThemeKnock (an AI-powered agency in Lahore, Pakistan).
+
+Your purpose: Help Pakistani students learn how to earn money using AI tools, Claude.ai, Wispr Flow, image generation, Fiverr, Upwork, automation.
+
+Your style:
+- Speak Roman Urdu (Urdu in Roman script) mixed with English
+- Direct, practical, no-fluff
+- Use Pakistani examples (Payoneer, JazzCash, Pakistani cities)
+- Use casual phrases: "yaar", "bhai", "bilkul", "samjho"
+- Encouraging but realistic
+- Short paragraphs, bullet points, numbered lists
+- Always end with clear next step
+
+Pricing context:
+- 1 USD ≈ 280 PKR
+- Mention realistic Pakistani earnings, not hype
+- Free tools first, paid only when worth it
+
+Stay focused on AI/freelancing/earning topics. Politely redirect if asked about politics, religion, personal matters, harmful content.`;
+
+const WIDGET_CONFIG = {
+  OPENROUTER_API_KEY: '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',
+  MODEL: 'google/gemini-2.0-flash-exp:free',
+  API_URL: 'https://openrouter.ai/api/v1/chat/completions',
+  MAX_TOKENS: 800,
+  TEMPERATURE: 0.7,
+  SITE_URL: 'https://talhaatariq.github.io/quiet-revolution',
+  SITE_NAME: 'The Quiet Revolution'
+};
+
+let widgetConversation = [];
+let widgetIsOpen = false;
+let widgetIsLoading = false;
+
+function getWidgetApiKey() {
+  return WIDGET_CONFIG.OPENROUTER_API_KEY || localStorage.getItem('openrouter_api_key') || '';
+}
+
+function setWidgetApiKey(key) {
+  localStorage.setItem('openrouter_api_key', key);
+}
+
+function loadWidgetConversation() {
+  try {
+    const saved = localStorage.getItem('talha_chat_history');
+    if (saved) widgetConversation = JSON.parse(saved);
+  } catch (e) {
+    widgetConversation = [];
+  }
+}
+
+function saveWidgetConversation() {
+  if (widgetConversation.length > 50) {
+    widgetConversation = widgetConversation.slice(-50);
+  }
+  localStorage.setItem('talha_chat_history', JSON.stringify(widgetConversation));
+}
+
+function formatWidgetMessage(text) {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n/g, '<br>')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>');
+}
+
+function renderWidgetMessages() {
+  const container = document.getElementById('widget-messages');
+  if (!container) return;
+  container.innerHTML = '';
+
+  if (widgetConversation.length === 0) {
+    container.innerHTML = `
+      <div class="widget-msg bot">
+        <p><strong>Asalaam-o-Alaikum! 👋</strong></p>
+        <p>Main AI Talha hoon. Pucho, kya help chahiye?</p>
+      </div>
+      <div class="widget-suggestions">
+        <button onclick="askWidgetSuggestion('Pehla qadam kya hoga?')">Pehla qadam kya hoga?</button>
+        <button onclick="askWidgetSuggestion('Fiverr kaise shuru karoon?')">Fiverr kaise shuru karoon?</button>
+        <button onclick="askWidgetSuggestion('Coding nahi aati, kya karoon?')">Coding nahi aati, kya karoon?</button>
+        <button onclick="askWidgetSuggestion('Mujhe ek niche choose karna hai')">Niche choose karna hai</button>
+      </div>
+    `;
+    return;
+  }
+
+  widgetConversation.forEach(msg => {
+    const div = document.createElement('div');
+    div.className = `widget-msg ${msg.role === 'user' ? 'user' : 'bot'}`;
+    div.innerHTML = formatWidgetMessage(msg.content);
+    container.appendChild(div);
+  });
+  container.scrollTop = container.scrollHeight;
+}
+
+function showWidgetTyping() {
+  const container = document.getElementById('widget-messages');
+  const div = document.createElement('div');
+  div.className = 'widget-msg bot widget-typing';
+  div.id = 'widget-typing';
+  div.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function hideWidgetTyping() {
+  const el = document.getElementById('widget-typing');
+  if (el) el.remove();
+}
+
+async function sendWidgetMessage(userMessage) {
+  if (widgetIsLoading) return;
+  const apiKey = getWidgetApiKey();
+
+  if (!apiKey) {
+    showApiKeyModal();
+    return;
+  }
+
+  widgetIsLoading = true;
+  document.getElementById('widget-send').disabled = true;
+  document.getElementById('widget-input').disabled = true;
+
+  widgetConversation.push({ role: 'user', content: userMessage });
+  saveWidgetConversation();
+  renderWidgetMessages();
+  showWidgetTyping();
+
+  try {
+    const messages = [
+      { role: 'system', content: WIDGET_SYSTEM_PROMPT },
+      ...widgetConversation.slice(-10).map(m => ({ role: m.role, content: m.content }))
+    ];
+
+    const response = await fetch(WIDGET_CONFIG.API_URL, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': WIDGET_CONFIG.SITE_URL,
+        'X-Title': WIDGET_CONFIG.SITE_NAME
+      },
+      body: JSON.stringify({
+        model: WIDGET_CONFIG.MODEL,
+        messages: messages,
+        max_tokens: WIDGET_CONFIG.MAX_TOKENS,
+        temperature: WIDGET_CONFIG.TEMPERATURE
+      })
+    });
+
+    hideWidgetTyping();
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+    }
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || 'Sorry yaar, koi response nahi mila.';
+
+    widgetConversation.push({ role: 'assistant', content: reply });
+    saveWidgetConversation();
+    renderWidgetMessages();
+  } catch (error) {
+    hideWidgetTyping();
+    if (error.message.includes('401')) {
+      widgetConversation.push({ role: 'assistant', content: 'API key invalid hai. Reset karo aur naya daalo.' });
+    } else {
+      widgetConversation.push({ role: 'assistant', content: `Error: ${error.message}` });
+    }
+    saveWidgetConversation();
+    renderWidgetMessages();
+  } finally {
+    widgetIsLoading = false;
+    document.getElementById('widget-send').disabled = false;
+    document.getElementById('widget-input').disabled = false;
+  }
+}
+
+function askWidgetSuggestion(text) {
+  document.getElementById('widget-input').value = text;
+  handleWidgetSend();
+}
+
+function handleWidgetSend() {
+  const input = document.getElementById('widget-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  sendWidgetMessage(text);
+}
+
+function toggleChatWidget() {
+  widgetIsOpen = !widgetIsOpen;
+  const panel = document.getElementById('chat-widget-panel');
+  const btn = document.getElementById('chat-widget-btn');
+
+  if (widgetIsOpen) {
+    panel.classList.add('open');
+    btn.classList.add('open');
+    setTimeout(() => {
+      const input = document.getElementById('widget-input');
+      if (input) input.focus();
+    }, 200);
+  } else {
+    panel.classList.remove('open');
+    btn.classList.remove('open');
+  }
+}
+
+function showApiKeyModal() {
+  const modal = document.getElementById('widget-api-modal');
+  if (modal) modal.style.display = 'flex';
+}
+
+function saveWidgetApiKey() {
+  const input = document.getElementById('widget-api-input');
+  const key = input.value.trim();
+  if (!key) return;
+  setWidgetApiKey(key);
+  document.getElementById('widget-api-modal').style.display = 'none';
+  // Continue with last user message if any pending
+}
+
+function closeApiKeyModal() {
+  document.getElementById('widget-api-modal').style.display = 'none';
+}
+
+function clearWidgetChat() {
+  if (!confirm('Saari chat history clear karni hai?')) return;
+  widgetConversation = [];
+  localStorage.removeItem('talha_chat_history');
+  renderWidgetMessages();
+}
+
+// Inject widget HTML and styles
+function injectChatWidget() {
+  // Don't inject on the dedicated chat page
+  if (window.location.pathname.includes('ask-talha.html')) return;
+
+  const widgetHTML = `
+    <button id="chat-widget-btn" class="chat-widget-btn" onclick="toggleChatWidget()" aria-label="Chat with AI Talha">
+      <span class="widget-icon-chat">💬</span>
+      <span class="widget-icon-close">×</span>
+      <span class="widget-pulse"></span>
+    </button>
+
+    <div id="chat-widget-panel" class="chat-widget-panel">
+      <div class="widget-header">
+        <div class="widget-header-info">
+          <div class="widget-avatar">T</div>
+          <div>
+            <div class="widget-title">AI Talha</div>
+            <div class="widget-status"><span class="status-dot"></span>Online · 24/7</div>
+          </div>
+        </div>
+        <button onclick="clearWidgetChat()" class="widget-clear" aria-label="Clear chat">⟲</button>
+      </div>
+
+      <div id="widget-messages" class="widget-messages"></div>
+
+      <div class="widget-input-row">
+        <input type="text" id="widget-input" class="widget-input" placeholder="Apna sawaal yahan likho..." autocomplete="off" />
+        <button id="widget-send" onclick="handleWidgetSend()" class="widget-send" aria-label="Send">↑</button>
+      </div>
+
+      <div class="widget-footer">Powered by AI · Roman Urdu mein bolo</div>
+    </div>
+
+    <div id="widget-api-modal" class="widget-modal-overlay">
+      <div class="widget-modal">
+        <h3 style="margin: 0 0 8px 0;">API Key Chahiye</h3>
+        <p style="font-size: 13px; color: var(--muted); margin-bottom: 12px;">
+          AI chat use karne ke liye OpenRouter ka free API key chahiye.
+        </p>
+        <ol style="font-size: 13px; padding-left: 18px; margin-bottom: 12px;">
+          <li><a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> pe jao</li>
+          <li>Sign up + create key (free)</li>
+          <li>Yahan paste karo:</li>
+        </ol>
+        <input type="password" id="widget-api-input" class="widget-modal-input" placeholder="sk-or-v1-..." />
+        <div style="display: flex; gap: 8px; margin-top: 12px;">
+          <button class="widget-btn-primary" onclick="saveWidgetApiKey()">Save</button>
+          <button class="widget-btn-secondary" onclick="closeApiKeyModal()">Cancel</button>
+        </div>
+        <p style="font-size: 11px; color: var(--muted); margin: 12px 0 0; text-align: center;">
+          Key sirf tumhare browser mein save hoti hai. 100% private.
+        </p>
+      </div>
+    </div>
+  `;
+
+  const widgetStyles = `
+    <style>
+      /* Floating Chat Widget */
+      .chat-widget-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--green);
+        color: white;
+        border: none;
+        cursor: pointer;
+        z-index: 999;
+        box-shadow: 0 6px 20px rgba(0, 168, 107, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s, background 0.2s;
+        position: fixed;
+      }
+      .chat-widget-btn:hover { transform: scale(1.05); background: var(--green-dark); }
+      .chat-widget-btn .widget-icon-chat { font-size: 24px; transition: opacity 0.2s, transform 0.3s; }
+      .chat-widget-btn .widget-icon-close { font-size: 32px; position: absolute; opacity: 0; transition: opacity 0.2s, transform 0.3s; transform: rotate(-90deg); }
+      .chat-widget-btn.open .widget-icon-chat { opacity: 0; transform: rotate(90deg); }
+      .chat-widget-btn.open .widget-icon-close { opacity: 1; transform: rotate(0); }
+      .widget-pulse {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: var(--green);
+        opacity: 0.3;
+        animation: widgetPulse 2s ease-out infinite;
+        pointer-events: none;
+      }
+      @keyframes widgetPulse {
+        0% { transform: scale(1); opacity: 0.5; }
+        100% { transform: scale(1.6); opacity: 0; }
+      }
+      .chat-widget-btn.open .widget-pulse { display: none; }
+
+      .chat-widget-panel {
+        position: fixed;
+        bottom: 100px;
+        right: 24px;
+        width: 380px;
+        max-width: calc(100vw - 32px);
+        height: 580px;
+        max-height: calc(100vh - 140px);
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 8px 24px rgba(0,0,0,0.08);
+        z-index: 998;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+        pointer-events: none;
+        transition: opacity 0.25s, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .chat-widget-panel.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .widget-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 18px;
+        background: linear-gradient(135deg, var(--green), var(--green-dark));
+        color: white;
+      }
+      .widget-header-info { display: flex; gap: 12px; align-items: center; }
+      .widget-avatar {
+        width: 42px;
+        height: 42px;
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 18px;
+        border: 2px solid rgba(255,255,255,0.3);
+      }
+      .widget-title { font-weight: 700; font-size: 15px; line-height: 1.2; }
+      .widget-status { font-size: 12px; opacity: 0.9; display: flex; align-items: center; gap: 6px; line-height: 1.2; margin-top: 2px; }
+      .status-dot {
+        width: 8px; height: 8px;
+        background: #4ade80;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #4ade80;
+      }
+      .widget-clear {
+        background: rgba(255,255,255,0.15);
+        border: none;
+        color: white;
+        width: 32px; height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.2s;
+      }
+      .widget-clear:hover { background: rgba(255,255,255,0.3); }
+
+      .widget-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background: #fafafa;
+      }
+      .widget-msg {
+        max-width: 88%;
+        padding: 10px 14px;
+        border-radius: 14px;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .widget-msg p { margin: 0 0 4px; }
+      .widget-msg p:last-child { margin-bottom: 0; }
+      .widget-msg.user {
+        align-self: flex-end;
+        background: var(--green);
+        color: white;
+        border-bottom-right-radius: 4px;
+      }
+      .widget-msg.bot {
+        align-self: flex-start;
+        background: white;
+        border: 1px solid var(--line);
+        color: var(--text);
+        border-bottom-left-radius: 4px;
+      }
+      .widget-msg.bot strong { color: var(--green-dark); }
+      .widget-msg.bot ul, .widget-msg.bot ol { padding-left: 20px; margin: 6px 0; }
+      .widget-msg.bot li { margin-bottom: 4px; font-size: 14px; }
+
+      .widget-typing { padding: 14px 18px; display: flex; gap: 4px; }
+      .typing-dot {
+        width: 7px; height: 7px;
+        background: var(--green);
+        border-radius: 50%;
+        animation: typingDot 1.2s infinite;
+      }
+      .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+      .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+      @keyframes typingDot {
+        0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+        30% { opacity: 1; transform: translateY(-4px); }
+      }
+
+      .widget-suggestions {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 8px;
+        padding: 0 4px;
+      }
+      .widget-suggestions button {
+        background: white;
+        border: 1px solid var(--line);
+        padding: 8px 12px;
+        border-radius: 100px;
+        font-family: inherit;
+        font-size: 13px;
+        color: var(--text-2);
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.15s;
+      }
+      .widget-suggestions button:hover {
+        border-color: var(--green);
+        color: var(--green);
+        background: var(--green-light);
+      }
+
+      .widget-input-row {
+        padding: 12px;
+        background: white;
+        border-top: 1px solid var(--line);
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .widget-input {
+        flex: 1;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 100px;
+        font-family: inherit;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .widget-input:focus { border-color: var(--green); }
+      .widget-send {
+        width: 40px; height: 40px;
+        background: var(--green);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .widget-send:hover { background: var(--green-dark); }
+      .widget-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      .widget-footer {
+        padding: 8px 16px;
+        text-align: center;
+        font-size: 11px;
+        color: var(--muted);
+        background: white;
+        border-top: 1px solid var(--line);
+      }
+
+      .widget-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .widget-modal {
+        background: white;
+        padding: 28px;
+        border-radius: 16px;
+        max-width: 420px;
+        width: 100%;
+      }
+      .widget-modal-input {
+        width: 100%;
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        outline: none;
+      }
+      .widget-modal-input:focus { border-color: var(--green); }
+      .widget-btn-primary, .widget-btn-secondary {
+        flex: 1;
+        padding: 10px 16px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+      }
+      .widget-btn-primary {
+        background: var(--green);
+        color: white;
+      }
+      .widget-btn-primary:hover { background: var(--green-dark); }
+      .widget-btn-secondary {
+        background: var(--surface-2);
+        color: var(--text);
+      }
+      .widget-btn-secondary:hover { background: var(--line); }
+
+      @media (max-width: 600px) {
+        .chat-widget-btn { bottom: 16px; right: 16px; width: 54px; height: 54px; }
+        .chat-widget-panel {
+          right: 8px;
+          left: 8px;
+          width: auto;
+          bottom: 80px;
+          height: calc(100vh - 100px);
+        }
+      }
+    </style>
+  `;
+
+  document.head.insertAdjacentHTML('beforeend', widgetStyles);
+  document.body.insertAdjacentHTML('beforeend', widgetHTML);
+
+  // Bind input enter key
+  setTimeout(() => {
+    const input = document.getElementById('widget-input');
+    if (input) {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleWidgetSend();
+        }
+      });
+    }
+    loadWidgetConversation();
+    renderWidgetMessages();
+  }, 100);
+}
+
+// Auto-init on DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', injectChatWidget);
+} else {
+  injectChatWidget();
+}

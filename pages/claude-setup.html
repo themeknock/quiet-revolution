@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Claude Setup, The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Tool 01 · Setup Guide</div>
+      <h1>Claude Setup, Step by Step</h1>
+      <p class="lead">
+        Claude.ai pe account banana 30 second ka kaam hai. Lekin <em>use kaise karna hai</em> 
+        yeh sabse important hai. Yahi sikhao ge yahan.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>Claude Kya Hai?</h2>
+      <p>
+        Claude ek AI hai, Anthropic company ne banaya. Tumhara <strong>smartest employee</strong> samjho.
+      </p>
+      <ul>
+        <li>24/7 available, kabhi thakta nahi</li>
+        <li>Roman Urdu samajhta hai</li>
+        <li>Coding, writing, design briefs, analysis, sab kar sakta hai</li>
+        <li>Free se shuru kar sakte ho</li>
+        <li>Phone aur laptop dono pe chalti hai</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Sign Up, 30 Second</h2>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Claude.ai Pe Jao</h3>
+        <p>Browser mein <code>claude.ai</code> type karo. Phone ya laptop, koi bhi.</p>
+        <p><a href="https://claude.ai" target="_blank" class="btn btn-outline">claude.ai Open Karo →</a></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Sign Up</h3>
+        <p>Email se ya Google se sign up karo. Recommend: <strong>Google se</strong>, ek click mein ho jata hai.</p>
+        <ul>
+          <li>"Continue with Google" pe click karo</li>
+          <li>Apna Gmail select karo</li>
+          <li>Permissions accept karo</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Verify Phone (Optional)</h3>
+        <p>Pakistan se sign up karte waqt kabhi kabhi phone verification maangti hai. Apna Pakistani number daal do, OTP aayega, done.</p>
+        <div class="callout warn">
+          <p><strong>Note:</strong> Agar phone verify nahi ho raha, <a href="https://www.google.com" target="_blank">Google Voice</a> ya <a href="https://textnow.com" target="_blank">TextNow</a> ka US number free use kar sakte ho. Lekin try karo Pakistani number se pehle.</p>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Pehla Chat</h3>
+        <p>Sign up hone ke baad, chat window aayegi. <strong>Yeh tumhara office hai ab.</strong></p>
+        <p>Pehla prompt, copy karke paste karo:</p>
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+          <div class="prompt-text">Main 17 saal ka student hoon, Pakistan mein hoon. Online paise kamana chahta hoon. Mere paas zero experience hai. Step by step batao kahan se shuru karoon. Roman Urdu mein jawab dena.</div>
+        </div>
+        <p>Bas. Claude tumhe poora roadmap dega, personalized.</p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Free vs Paid, Konsa Choose Karen?</h2>
+      <div class="compare">
+        <div class="compare-col bad">
+          <h4>Free Plan</h4>
+          <ul>
+            <li>Daily limited messages</li>
+            <li>Older Claude model</li>
+            <li>Slower response</li>
+            <li>Basic features</li>
+          </ul>
+        </div>
+        <div class="compare-col good">
+          <h4>Pro Plan ($20/mo)</h4>
+          <ul>
+            <li>5x zyaada messages</li>
+            <li>Latest Claude model</li>
+            <li>Faster, better quality</li>
+            <li>Projects & memory</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <p><strong>Mera suggestion:</strong> Pehle 1-2 hafte free plan use karo. Jab tum samajh jao kaisa kaam karta hai, phir Pro upgrade karo. Pehla $50 jab kamao, tabhi paid plan lo. <em>Tools tumhe paise dilane chahiye, tumse paise nahi.</em></p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Claude Ko Effectively Use Kaise Karen?</h2>
+      <p>Claude tumhare prompt ki quality jitna achi, utna hi acha jawab. Yeh teen rules follow karo:</p>
+
+      <h3>Rule 1, Context Do</h3>
+      <p>Sirf "blog likho" mat bolo. Yeh batao:</p>
+      <ul>
+        <li>Topic kya hai</li>
+        <li>Audience kaun hai</li>
+        <li>Tone kaisa chahiye (formal/casual)</li>
+        <li>Length kitni</li>
+      </ul>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Pakistani salon ke liye Instagram caption likho. Audience: 18-35 saal ki larkiyaan jo facials karwati hain. Tone: friendly, energetic. 4 lines, hashtags ke saath. Roman Urdu mein.</div>
+      </div>
+
+      <h3>Rule 2, Examples Do</h3>
+      <p>Agar specific style chahiye, example dikhao Claude ko:</p>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">Mujhe LinkedIn posts likhne hain. Yeh mera pehla post tha jo viral gaya, [post paste karo]. Iska tone aur style follow karke 5 aur posts likho, software engineering pe.</div>
+      </div>
+
+      <h3>Rule 3, Iterate Karo</h3>
+      <p>Pehla output perfect nahi hota. Bas keh do, "isse better banao" ya "yeh part change karo":</p>
+      <ul>
+        <li>"Pehla paragraph short karo"</li>
+        <li>"Tone professional kar do"</li>
+        <li>"Keywords add karo: AI, automation, Pakistan"</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Claude Mobile App</h2>
+      <p>Phone pe chahiye? <strong>Claude.ai mobile pe bhi chalti hai</strong>, browser se. Ya official app download karo:</p>
+      <ul>
+        <li><a href="https://apps.apple.com/app/claude-by-anthropic/id6473753684" target="_blank">iPhone, App Store</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.anthropic.claude" target="_blank">Android, Play Store</a></li>
+      </ul>
+      <p>Mobile pe voice input bhi available hai, bolne se prompt ban jaata hai.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Common Mistakes, Yeh Mat Karna</h2>
+      <ul>
+        <li><strong>Sirf chhote prompts likhna</strong>, "blog likho", koi context nahi. Result bekar.</li>
+        <li><strong>Pehle output pe stop kar dena</strong>, refine karte raho. Iterate karo.</li>
+        <li><strong>Hindi/Urdu script mein likhna</strong>, Roman Urdu use karo. Better samajhti hai.</li>
+        <li><strong>Sirf English assume karna</strong>, Claude Roman Urdu, Hindi, Punjabi, sab samajhti hai.</li>
+        <li><strong>Privacy data daalna</strong>, passwords, OTPs, yeh kabhi nahi.</li>
+      </ul>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Next Step</h2>
+      <p>Claude setup ho gaya. Ab doosra tool, <strong>Wispr Flow</strong>. Yeh tumhe type karne se bachata hai. Bolne se kaam ho jaata hai.</p>
+      <div class="btn-row">
+        <a href="wispr-setup.html" class="btn">Wispr Flow Setup →</a>
+        <a href="ask-talha.html" class="btn btn-outline">💬 Ask Talha</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

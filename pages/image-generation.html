@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Image Generation, The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Visual Content · AI Tools</div>
+      <h1>Image Generation, Visual Content Banao</h1>
+      <p class="lead">
+        Har business ko images chahiye, social media, ads, websites, presentations. AI ne yeh kaam
+        bilkul change kar diya. Ab tum text se images bana sakte ho, minutes mein.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>Best AI Image Tools</h2>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🎨</div>
+          <div class="card-title">Google Flow (Nano Banana)</div>
+          <div class="card-desc"><strong>Best for beginners.</strong> Free, easy interface, fast. Pakistan se accessible.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🌟</div>
+          <div class="card-title">Midjourney</div>
+          <div class="card-desc">Best quality. $10/mo. Discord-based. Most professional results.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <div class="card-title">Leonardo AI</div>
+          <div class="card-desc">Free tier hai. Browser mein. Good middle ground.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎭</div>
+          <div class="card-title">DALL-E (ChatGPT)</div>
+          <div class="card-desc">ChatGPT Plus ke saath. Conversational image gen.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Google Flow (Nano Banana), Beginner Ka First Choice</h2>
+      <p>
+        Google Flow free hai aur Pakistan se accessible hai (VPN ki zaroorat nahi hoti zyada baar).
+        Yahan se start karo.
+      </p>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Account Banao</h3>
+        <p><a href="https://labs.google/fx/tools/flow" target="_blank">labs.google/fx/tools/flow</a> pe jao. Google account se login.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Pehla Image Generate Karo</h3>
+        <p>Prompt box mein simple description likho, example:</p>
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+          <div class="prompt-text">A young Pakistani man working on laptop at a cozy rooftop in Lahore, golden hour lighting, modern aesthetic, photorealistic style</div>
+        </div>
+        <p>Generate dabao, 30 second mein 4 variations milengi.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Reference Images Use Karo</h3>
+        <p>Flow ka killer feature, image upload karke "is style mein banao" bol sakte ho. Character consistency ke liye perfect.</p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Prompt Engineering, Kya Achi Image Banata Hai</h2>
+
+      <h3>Bad Prompt</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">A man working</div>
+      </div>
+      <p class="muted">Result: generic, boring, kahin bhi ka aadmi ho sakta hai.</p>
+
+      <h3>Good Prompt</h3>
+      <div class="prompt-box">
+        <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+        <div class="prompt-text">A young Pakistani entrepreneur (25 years old) working on a laptop at a wooden cafe table in Lahore, late afternoon golden hour light streaming through window, plants in background, blue shirt, focused expression. Cinematic photography. Sony A7 IV, 50mm lens, f/1.8. Warm color grade.</div>
+      </div>
+      <p class="muted">Result: specific, atmospheric, professional.</p>
+
+      <h3>Magic Formula</h3>
+      <p>Achi prompt ka structure:</p>
+      <ol>
+        <li><strong>Subject:</strong> Kaun (age, ethnicity, clothing)</li>
+        <li><strong>Action:</strong> Kya kar raha hai</li>
+        <li><strong>Setting:</strong> Kahan hai (location, mood)</li>
+        <li><strong>Lighting:</strong> Kaisi roshni</li>
+        <li><strong>Camera:</strong> Lens type, aperture (cinematic feel)</li>
+        <li><strong>Style:</strong> Photo / illustration / 3D / anime</li>
+        <li><strong>Color grade:</strong> Warm / cool / specific</li>
+      </ol>
+    </section>
+
+    <section class="fade-up">
+      <h2>Real Use Cases, Paise Kamane Ke</h2>
+
+      <div class="card">
+        <div class="card-icon">📸</div>
+        <div class="card-title">Social Media Posts (Local Brands)</div>
+        <p class="card-desc">Pakistani restaurants, salons, boutiques ko Instagram-ready images chahiye. AI se 5 minute mein. Pricing: $20-50/image.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <div class="card-title">Logo Concepts</div>
+        <p class="card-desc">Startups ko logo direction chahiye. AI se 10-15 concepts dikhao. Sell @ $50-150 per logo direction.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <div class="card-title">Book Covers</div>
+        <p class="card-desc">Self-publishing authors ko covers chahiye. Fiverr pe top sellers AI use karte hain. $50-200 per cover.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎬</div>
+        <div class="card-title">Thumbnails</div>
+        <p class="card-desc">YouTube creators ke liye thumbnails. $5-20 per thumbnail. Volume kaam, 50 thumbnails/mo = $250-1000.</p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Pakistan-Specific Image Generation</h2>
+      <p>Pakistani context ke liye prompts:</p>
+      <ul>
+        <li><strong>Locations:</strong> Lahore rooftop, Karachi beach, Islamabad cafe, Multan bazaar</li>
+        <li><strong>People:</strong> South Asian / Pakistani features specify karo</li>
+        <li><strong>Clothing:</strong> "shalwar kameez", "kurta", "western casual"</li>
+        <li><strong>Cultural elements:</strong> chai, charpai, rickshaw, mosque, gulmohar tree</li>
+      </ul>
+      <p>AI ko bilkul specific batao, generic global imagery se bachno.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Workflow, Client Order</h2>
+      <ol>
+        <li>Client se brief lo, kya chahiye, kis style mein</li>
+        <li>3-4 prompt variations Claude se likhwao</li>
+        <li>Flow / Midjourney mein generate karo</li>
+        <li>Best 5 images select karo</li>
+        <li>Photoshop / Canva mein touch-up (agar zaroorat ho)</li>
+        <li>Client ko deliver</li>
+      </ol>
+      <p>Total time per image: <strong>5-15 minute.</strong> Pehle 1-2 ghante leta tha photographer ke saath.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Pricing, Fiverr / Local</h2>
+      <ul>
+        <li><strong>Fiverr Single Image:</strong> $10-30</li>
+        <li><strong>Fiverr Package (5 images):</strong> $40-80</li>
+        <li><strong>Local Pakistani Brand (10 images/mo):</strong> Rs. 15,000-30,000</li>
+        <li><strong>Custom Photoshoot Replacement:</strong> $200-500 per project</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Tips, Stand Out</h2>
+      <ul>
+        <li>Reference images bhejo client ko approve karne ke liye pehle</li>
+        <li>3 variations dao har request mein</li>
+        <li>High-resolution deliver karo (4K minimum)</li>
+        <li>PSD/editable file bhi do (extra fee charge kar sakte ho)</li>
+        <li>Specialize karo, sirf food, sirf fashion, sirf real estate, etc.</li>
+      </ul>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Next Step</h2>
+      <p>Image gen samjh aaya? Ab dekho <strong>SaaS building</strong>, apni khud ki product banake bechh sakte ho.</p>
+      <div class="btn-row">
+        <a href="saas-guide.html" class="btn">SaaS Building →</a>
+        <a href="prompts-library.html" class="btn btn-outline">Prompts Library</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

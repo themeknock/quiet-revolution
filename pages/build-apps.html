@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apps Banao, The Quiet Revolution</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar" id="sidebar"></aside>
+
+  <main class="main">
+
+    <div class="page-header fade-up">
+      <div class="page-tag">Build · No Coding Required</div>
+      <h1>Apps Banao, Coding Aaye Bagair</h1>
+      <p class="lead">
+        Maine khud coding nahi seekhi thi. Aaj ThemeKnock ke 3 apps live chal rahe hain.
+        Yahan exact tarika hai, kaise tum bhi <strong>bolne se</strong> apps bana sakte ho.
+      </p>
+    </div>
+
+    <section class="fade-up">
+      <h2>"App" Kya Hota Hai?</h2>
+      <p>"App" ka matlab confused mat ho. Yeh kuch bhi ho sakti hai:</p>
+      <ul>
+        <li><strong>Website</strong>, har koi browser mein use karta hai</li>
+        <li><strong>Web app</strong>, interactive website (form, calculator, dashboard)</li>
+        <li><strong>Telegram/WhatsApp bot</strong>, messaging mein chalti hai</li>
+        <li><strong>Browser extension</strong>, Chrome ke andar tool</li>
+        <li><strong>Mobile app</strong>, phone pe install hoti hai (most complex)</li>
+      </ul>
+      <p>Beginner ke liye <strong>web apps</strong> sabse easy. Wahin se start.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Tools You Need</h2>
+      <ul>
+        <li><strong>Claude.ai</strong>, code likhne ke liye</li>
+        <li><strong>VS Code</strong>, free code editor (<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>)</li>
+        <li><strong>Browser</strong>, testing ke liye (Chrome / Edge)</li>
+        <li><strong>GitHub</strong>, code save + free hosting (sab ek jagah)</li>
+      </ul>
+      <p>Sab free hai. Total cost: $0.</p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Pehla App, Step By Step</h2>
+      <p>Chalo ek simple app banate hain, <strong>"Daily Quote Generator"</strong></p>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Idea Define Karo</h3>
+        <p>Specific raho. "Daily Quote Generator" ka matlab:</p>
+        <ul>
+          <li>Webpage khulta hai, ek quote dikhata hai</li>
+          <li>"New Quote" button, naya quote</li>
+          <li>"Share" button, Twitter pe share</li>
+        </ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Claude Ko Bolo</h3>
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
+          <div class="prompt-text">Mujhe ek simple web app banao, Daily Quote Generator.
+
+Features:
+- Single HTML file (HTML + CSS + JS sab ek file mein)
+- Beautiful dark theme, modern design
+- 30 inspirational quotes hardcoded array mein
+- Page load pe random quote dikhao
+- "New Quote" button, refresh karega
+- "Share on Twitter" button
+- Mobile responsive
+
+Quotes "motivational" type hon. Author ka name bhi include karo.
+
+Pure HTML/CSS/JS, koi external library nahi.</div>
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Code Save Karo</h3>
+        <p>Claude ka output copy karo. VS Code mein nayi file banao, <code>index.html</code>. Code paste karo. Save.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Test Karo</h3>
+        <p>VS Code mein right click → "Open with Live Server" (extension install karo pehle). Browser mein khulega, apna app dekho!</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Improve Karo</h3>
+        <p>Kuch dekh ke pasand nahi? Claude ko phir bolo:</p>
+        <ul>
+          <li>"Background green theme kar do"</li>
+          <li>"Quote ke neeche ek small icon add karo"</li>
+          <li>"Animation add karo new quote pe"</li>
+        </ul>
+        <p>Iterate karte raho.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <h3>Deploy, Live Karo</h3>
+        <p>GitHub Pages pe live karo (sirf yahi tool kaafi hai):</p>
+        <ol>
+          <li><a href="https://github.com" target="_blank">github.com</a> pe sign up (free)</li>
+          <li>Naya repository banao, public</li>
+          <li>Apni files upload karo</li>
+          <li>Settings, Pages, Source: main branch, Save</li>
+          <li>1 minute mein live URL mil jata hai</li>
+        </ol>
+        <p>Apna app ab internet pe hai, bilkul free!</p>
+        <p><a href="free-hosting.html" class="btn btn-outline">Full Hosting Guide →</a></p>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Real App Ideas, Bechh Sakte Ho</h2>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <div class="card-title">Booking System</div>
+          <div class="card-desc">Salon, doctor, tuition centers ke liye. Sell @ $300-500.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <div class="card-title">Resume Builder</div>
+          <div class="card-desc">Pakistani job seekers ke liye. Free + paid templates.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <div class="card-title">Expense Tracker</div>
+          <div class="card-desc">Personal finance. Sell @ $50-100 to small businesses.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🍔</div>
+          <div class="card-title">Restaurant Menu</div>
+          <div class="card-desc">Digital menu with QR. Sell @ $200 per restaurant.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <div class="card-title">Quiz App</div>
+          <div class="card-desc">Schools, tuition centers ke liye. Custom quizzes.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📦</div>
+          <div class="card-title">Inventory Manager</div>
+          <div class="card-desc">Small shops ke liye. $300-600 setup.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-up">
+      <h2>Common Mistakes, Pehle Apps Mein</h2>
+      <ul>
+        <li><strong>Bohot complex idea</strong>, pehle simple banao. Confidence build hone do.</li>
+        <li><strong>Code samjhe bagair copy paste</strong>, Claude se sawaal pucho jab samajh nahi aaye</li>
+        <li><strong>Errors aane pe ghabra jana</strong>, error message Claude ko paste karo, woh fix kar dega</li>
+        <li><strong>Deploy nahi karna</strong>, live link bina app useless hai. Always deploy.</li>
+        <li><strong>Pehle perfect karna chahna</strong>, v1 launch karo, phir improve. Ship beats perfect.</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Advanced, Real Apps</h2>
+      <p>Beginner level cross karne ke baad, yeh learn karo:</p>
+      <ul>
+        <li><strong>Database connect karna</strong>, Supabase free tier</li>
+        <li><strong>User authentication</strong>, login system</li>
+        <li><strong>Payment integration</strong>, Stripe / JazzCash</li>
+        <li><strong>API integrations</strong>, external services connect karna</li>
+        <li><strong>Email sending</strong>, Resend, Sendgrid</li>
+      </ul>
+      <p>Yeh sab Claude ke saath karo. Ek topic ek time. Slow but steady.</p>
+    </section>
+
+    <hr class="divider" />
+
+    <section class="fade-up">
+      <h2>Next Step</h2>
+      <p>Apps banane se confidence aaya? Acha. Ab <strong>image generation</strong> bhi seekho, visual content business ka 50% hai.</p>
+      <div class="btn-row">
+        <a href="image-generation.html" class="btn">Image Generation →</a>
+        <a href="prompts-library.html" class="btn btn-outline">Prompts Library</a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="../assets/components.js"></script>
+<script src="../assets/chat-widget.js"></script>
+</body>
+</html>

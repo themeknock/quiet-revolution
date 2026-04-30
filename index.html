@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Quiet Revolution, AI Earning Guide for Pakistani Students</title>
+<meta name="description" content="Pakistan ke students ke liye AI-powered earning ka complete practical guide. By Talha Tariq, ThemeKnock." />
+<link rel="stylesheet" href="assets/styles.css" />
+<style>
+  /* Home page specific styles */
+  body {
+    background: #fafafa;
+  }
+
+  .home-app {
+    display: block;
+    min-height: 100vh;
+  }
+
+  /* Navbar */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+  }
+  .navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-brand {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-brand .accent { color: var(--green); }
+  .navbar-links {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+  .navbar-links a {
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .navbar-links a:hover { color: var(--green); }
+  .navbar-links .btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 700px) {
+    .navbar-inner { padding: 0 20px; }
+    .navbar-links a:not(.btn) { display: none; }
+  }
+
+  /* Hero */
+  .hero-section {
+    background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+    padding: 80px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,168,107,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(124,58,237,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+  @media (max-width: 700px) { .container { padding: 0 20px; } }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--green-dim);
+    color: var(--green);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse-soft 2s infinite;
+  }
+
+  .hero-h1 {
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 20px;
+  }
+  .hero-h1 .quiet { color: var(--text); }
+  .hero-h1 .accent {
+    color: var(--green);
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .hero-lead {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 32px;
+    max-width: 540px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--green);
+    line-height: 1;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  /* Hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1;
+  }
+  .hero-card-stack {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .hero-card {
+    position: absolute;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  .hero-card-1 {
+    top: 0;
+    left: 0;
+    width: 60%;
+    z-index: 3;
+    animation: floatUp 6s ease-in-out infinite;
+  }
+  .hero-card-2 {
+    top: 30%;
+    right: 0;
+    width: 55%;
+    z-index: 2;
+    animation: floatUp 6s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+  .hero-card-3 {
+    bottom: 0;
+    left: 15%;
+    width: 65%;
+    z-index: 1;
+    animation: floatUp 6s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  @keyframes floatUp {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .hero-card-icon {
+    width: 40px; height: 40px;
+    background: var(--green-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .hero-card-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .hero-card-meta {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .hero-card-amount {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--green);
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Logo strip */
+  .logo-strip {
+    background: white;
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .logo-strip-title {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px;
+    align-items: center;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media (max-width: 700px) {
+    .logo-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  }
+  .logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 56px;
+    opacity: 0.85;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .logo-item:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+  .logo-item img {
+    max-height: 48px;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  .logo-item-text {
+    font-weight: 700;
+    color: var(--text-2);
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  /* Section */
+  .section {
+    padding: 80px 0;
+  }
+  .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+  .section-tag {
+    display: inline-block;
+    background: var(--green-dim);
+    color: var(--green);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .section h2 {
+    font-size: clamp(32px, 4.5vw, 48px);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+  .section-subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Tools section */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 700px) {
+    .tools-grid { grid-template-columns: 1fr; }
+  }
+  .tool-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+  }
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    color: inherit;
+  }
+  .tool-card-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+  }
+  .tool-card-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 18px;
+    background: white;
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    flex-shrink: 0;
+  }
+  .tool-card-logo img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+  }
+  .tool-card-name {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .tool-card-tag {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .tool-card-desc {
+    font-size: 16px;
+    color: var(--text-2);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .tool-card-link {
+    color: var(--green);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  /* Path cards */
+  .path-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 700px) {
+    .path-grid { grid-template-columns: 1fr; }
+  }
+  .path-card-home {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .path-card-home:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    color: inherit;
+  }
+  .path-card-home::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green), transparent 80%);
+  }
+  .path-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .path-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .path-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .path-amount {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--green);
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* Story section */
+  .story-section {
+    background: white;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .story-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  .story-image {
+    aspect-ratio: 4/3;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #e6f7ef, #c4eedd);
+  }
+  .story-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(0,168,107,0.15), transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(124,58,237,0.1), transparent 60%);
+  }
+  .story-laptop {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    aspect-ratio: 16/10;
+    background: #1a1a1a;
+    border-radius: 12px 12px 4px 4px;
+    border: 4px solid #333;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  }
+  .story-laptop::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    background: linear-gradient(135deg, #0a3d2c, #001a14);
+    border-radius: 6px;
+  }
+  .story-laptop::after {
+    content: 'claude.ai';
+    position: absolute;
+    inset: 8px;
+    color: var(--green);
+    font-family: 'JetBrains Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .story-badge {
+    position: absolute;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 14px;
+    box-shadow: var(--shadow-md);
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .story-badge.b1 { top: 12%; right: 8%; animation: floatUp 5s ease-in-out infinite; }
+  .story-badge.b2 { bottom: 15%; left: 5%; animation: floatUp 5s ease-in-out infinite; animation-delay: 2s; }
+  .story-badge-icon {
+    width: 28px; height: 28px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  /* Subscription pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 800px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+  .price-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px;
+    text-align: left;
+    position: relative;
+  }
+  .price-card.featured {
+    border-color: var(--green);
+    border-width: 2px;
+    transform: scale(1.02);
+  }
+  .price-card.featured::before {
+    content: 'RECOMMENDED';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--green);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  .price-name {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .price-amount {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .price-amount .currency { font-size: 18px; vertical-align: top; }
+  .price-amount .period { font-size: 14px; color: var(--muted); font-weight: 400; }
+  .price-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+  }
+  .price-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-2);
+    border-bottom: 1px solid var(--surface-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .price-features li::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  /* CTA section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -20%;
+    width: 80%; height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1), transparent 60%);
+  }
+  .cta-section h2 {
+    color: white;
+    font-size: clamp(32px, 5vw, 56px);
+    margin-bottom: 16px;
+  }
+  .cta-section p {
+    color: rgba(255,255,255,0.9);
+    font-size: 20px;
+    margin-bottom: 32px;
+  }
+  .cta-section .btn {
+    background: white;
+    color: var(--green);
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+  .cta-section .btn:hover {
+    background: rgba(255,255,255,0.95);
+    color: var(--green-dark);
+  }
+
+  /* Footer */
+  .footer {
+    background: white;
+    border-top: 1px solid var(--line);
+    padding: 40px 0;
+  }
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-brand {
+    font-weight: 700;
+    color: var(--text);
+  }
+  .footer-brand .accent { color: var(--green); }
+  .footer-meta {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .footer-meta a { color: var(--muted); }
+  .footer-meta a:hover { color: var(--green); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="/" class="nav-brand">The Quiet <span class="accent">Revolution</span></a>
+    <div class="navbar-links">
+      <a href="pages/start-here.html">Start Here</a>
+      <a href="pages/fiverr-guide.html">Earning Paths</a>
+      <a href="pages/prompts-library.html">Prompts</a>
+      <a href="pages/ask-talha.html" class="btn">💬 Ask Talha</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+
+      <div>
+        <div class="hero-tag">By Talha Tariq · ThemeKnock · Lahore</div>
+        <h1 class="hero-h1">
+          The <span class="quiet">Quiet</span><br/>
+          <span class="accent">Revolution.</span>
+        </h1>
+        <p class="hero-lead">
+          Pakistan ke students ke liye AI-powered earning ka complete practical guide.
+          Bina coding. Bina paise. Bina degree. <strong>Sirf 2 tools, aur ek decision.</strong>
+        </p>
+        <div class="btn-row">
+          <a href="pages/start-here.html" class="btn">Shuru Karo →</a>
+          <a href="pages/ask-talha.html" class="btn btn-outline">💬 Ask Talha (AI)</a>
+        </div>
+
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">#10</div>
+            <div class="hero-stat-label">Pakistan Globally</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">10x</div>
+            <div class="hero-stat-label">Faster With AI</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">$0</div>
+            <div class="hero-stat-label">To Start</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-stack">
+          <div class="hero-card hero-card-1">
+            <div class="hero-card-icon">💰</div>
+            <div class="hero-card-title">Fiverr Order</div>
+            <div class="hero-card-meta">Day 28 · USD</div>
+            <div class="hero-card-amount">+$50</div>
+          </div>
+          <div class="hero-card hero-card-2">
+            <div class="hero-card-icon">📧</div>
+            <div class="hero-card-title">JazzCash</div>
+            <div class="hero-card-meta">Month 3</div>
+            <div class="hero-card-amount">Rs. 78,000</div>
+          </div>
+          <div class="hero-card hero-card-3">
+            <div class="hero-card-icon">🚀</div>
+            <div class="hero-card-title">Recurring Client</div>
+            <div class="hero-card-meta">Month 6 · auto</div>
+            <div class="hero-card-amount">$1,200/mo</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOGO STRIP -->
+<section class="logo-strip">
+  <div class="container">
+    <div class="logo-strip-title">Yeh Tools Cover Karte Hain</div>
+    <div class="logo-grid">
+      <div class="logo-item"><img src="https://logo.clearbit.com/claude.ai" alt="Claude" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Claude</div>'" /></div>
+      <div class="logo-item"><img src="https://logo.clearbit.com/wisprflow.ai" alt="Wispr" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Wispr</div>'" /></div>
+      <div class="logo-item"><img src="https://logo.clearbit.com/fiverr.com" alt="Fiverr" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Fiverr</div>'" /></div>
+      <div class="logo-item"><img src="https://logo.clearbit.com/upwork.com" alt="Upwork" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Upwork</div>'" /></div>
+      <div class="logo-item"><img src="https://logo.clearbit.com/payoneer.com" alt="Payoneer" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Payoneer</div>'" /></div>
+      <div class="logo-item"><img src="https://logo.clearbit.com/midjourney.com" alt="Midjourney" onerror="this.outerHTML='<div class=&quot;logo-item-text&quot;>Midjourney</div>'" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS SECTION -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">The Stack</div>
+      <h2>Sirf 2 Tools, Bas.</h2>
+      <p class="section-subtitle">
+        Yahi 2 cheezein replace karte hain 10 employees ko. Free se shuru. Phone pe chal jate hain.
+      </p>
+    </div>
+
+    <div class="tools-grid">
+
+      <a href="pages/claude-setup.html" class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-card-logo">
+            <img src="https://logo.clearbit.com/claude.ai" alt="Claude" onerror="this.outerHTML='<div style=&quot;font-size:32px&quot;>✨</div>'" />
+          </div>
+          <div>
+            <div class="tool-card-name">Claude.ai</div>
+            <div class="tool-card-tag">Tool 01 · Smartest Employee</div>
+          </div>
+        </div>
+        <p class="tool-card-desc">
+          Anthropic ka AI. Code likhta hai, content banata hai, design sochta hai.
+          Roman Urdu samajhta hai. <strong>Free se shuru, phir Pro ($20/mo).</strong>
+        </p>
+        <div class="tool-card-link">Setup Guide dekho →</div>
+      </a>
+
+      <a href="pages/wispr-setup.html" class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-card-logo">
+            <img src="https://logo.clearbit.com/wisprflow.ai" alt="Wispr" onerror="this.outerHTML='<div style=&quot;font-size:32px&quot;>🎙️</div>'" />
+          </div>
+          <div>
+            <div class="tool-card-name">Wispr Flow</div>
+            <div class="tool-card-tag">Tool 02 · Voice to Text</div>
+          </div>
+        </div>
+        <p class="tool-card-desc">
+          Type karne ki bajaye bolo. 5x faster. Roman Urdu support.
+          Background mein chalta hai, har app mein. <strong>Free trial, phir $15/mo.</strong>
+        </p>
+        <div class="tool-card-link">Setup Guide dekho →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="section story-section">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-image">
+        <div class="story-laptop"></div>
+        <div class="story-badge b1">
+          <div class="story-badge-icon">⚡</div>
+          <div>10x Faster Work</div>
+        </div>
+        <div class="story-badge b2">
+          <div class="story-badge-icon">💰</div>
+          <div>$3,000+ /mo</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag">Mera Khud Ka Example</div>
+        <h2>ThemeKnock, Pehle 10, Ab Sirf Main.</h2>
+        <p style="font-size: 17px; color: var(--text-2); line-height: 1.6; margin-bottom: 16px;">
+          Meri company hai. Saal pehle <strong>10 employees</strong> the, designers, developers, content writers.
+          Office, salaries, har mahine bohot kharcha.
+        </p>
+        <p style="font-size: 17px; color: var(--text-2); line-height: 1.6; margin-bottom: 24px;">
+          Aaj, sirf <strong style="color: var(--green);">main hoon</strong>. Akela. AI ke saath kaam karta hoon.
+          Same delivery. <strong>10x speed.</strong> 90% kam kharcha. Yahi 'Quiet Revolution' hai 
+          aur tum bhi yeh kar sakte ho.
+        </p>
+        <a href="pages/workflow.html" class="btn">Mera Workflow dekho →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARNING PATHS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">3 Earning Paths</div>
+      <h2>Tumhari Choice, Kahan Se Shuru?</h2>
+      <p class="section-subtitle">
+        Teen tareeke jo abhi Pakistani students ke liye actively kaam kar rahe hain.
+        Pehle ek choose karo, phir master karo.
+      </p>
+    </div>
+
+    <div class="path-grid">
+
+      <a href="pages/fiverr-guide.html" class="path-card-home">
+        <div class="path-num">PATH 01 · EASIEST</div>
+        <div class="path-title">Fiverr AI Gigs</div>
+        <p class="path-desc">
+          AI copywriting, video editing, design, yeh gigs explode kar rahe hain.
+          Free se shuru. Pakistani sellers top 10 mein already hain.
+        </p>
+        <div class="path-amount">$50 - $1,000/mo →</div>
+      </a>
+
+      <a href="pages/upwork-guide.html" class="path-card-home">
+        <div class="path-num">PATH 02 · HIGHER PAY</div>
+        <div class="path-title">Upwork Foreign Clients</div>
+        <p class="path-desc">
+          Hourly $15-25 starting. Foreign clients dollars mein pay karte hain.
+          Long-term contracts. Slow start, faster growth.
+        </p>
+        <div class="path-amount">$500 - $5,000/mo →</div>
+      </a>
+
+      <a href="pages/content-writing.html" class="path-card-home">
+        <div class="path-num">PATH 03 · QUICK START</div>
+        <div class="path-title">Content Writing</div>
+        <p class="path-desc">
+          Pakistani brands ko Instagram posts, blogs, emails. Local clients.
+          Cold DM kaam karta hai. Pehle order 1 hafte mein.
+        </p>
+        <div class="path-amount">Rs. 25,000 - 100,000/mo →</div>
+      </a>
+
+      <a href="pages/automation.html" class="path-card-home">
+        <div class="path-num">PATH 04 · MERA WALA</div>
+        <div class="path-title">Automation Services</div>
+        <p class="path-desc">
+          Businesses ke chhote tasks automate karo. Setup ek baar, paise har month.
+          ThemeKnock ka asli kaam yahi hai.
+        </p>
+        <div class="path-amount">$1,000 - $10,000/mo →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- PRICING (subscriptions) -->
+<section class="section" style="background: white;">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">Tools Subscriptions</div>
+      <h2>Kya Pay Karna Padega?</h2>
+      <p class="section-subtitle">
+        Free se shuru. Paid sirf jab kaam aane lage. <strong>Tools ko paise dilane chahiye, tumse paise nahi lene.</strong>
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-name">Beginner Stack</div>
+        <div class="price-amount"><span class="currency">$</span>0<span class="period">/mo</span></div>
+        <p style="font-size: 13px; color: var(--muted); margin: 8px 0 0;">Pehle 2 hafte ke liye perfect</p>
+        <ul class="price-features">
+          <li>Claude.ai Free Plan</li>
+          <li>Wispr Flow Free Trial</li>
+          <li>Mac Built-in Dictation</li>
+          <li>Google Flow (free image gen)</li>
+          <li>VS Code (coding free)</li>
+          <li>GitHub Pages (free hosting)</li>
+        </ul>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-name">Recommended Stack</div>
+        <div class="price-amount"><span class="currency">$</span>35<span class="period">/mo</span></div>
+        <p style="font-size: 13px; color: var(--muted); margin: 8px 0 0;">Jab pehla $200 kamao</p>
+        <ul class="price-features">
+          <li>Claude.ai Pro ($20)</li>
+          <li>Wispr Flow Pro ($15)</li>
+          <li>Unlimited messages</li>
+          <li>Latest AI models</li>
+          <li>Faster responses</li>
+          <li><strong>10x output potential</strong></li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Pro Builder Stack</div>
+        <div class="price-amount"><span class="currency">$</span>45<span class="period">/mo</span></div>
+        <p style="font-size: 13px; color: var(--muted); margin: 8px 0 0;">Agency / Power user</p>
+        <ul class="price-features">
+          <li>Recommended Stack +</li>
+          <li>Midjourney ($10)</li>
+          <li>Custom domain (Rs. 300/mo)</li>
+          <li>Stripe / JazzCash setup</li>
+          <li>GitHub Pro (optional)</li>
+          <li>Premium support</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>The Quiet Revolution.<br/>Already Happening.</h2>
+    <p>Tumhari class ka koi student abhi yeh kar raha hai. Tum kab shuru karoge?</p>
+    <a href="pages/start-here.html" class="btn">Shuru Karo Abhi →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        The Quiet <span class="accent">Revolution</span> · By Talha Tariq
+      </div>
+      <div class="footer-meta">
+        <a href="https://github.com/talhaatariq/quiet-revolution" target="_blank">GitHub</a> ·
+        <a href="https://themeknock.com" target="_blank">ThemeKnock</a> ·
+        Made with AI · 2026
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/chat-widget.js"></script>
+</body>
+</html>
