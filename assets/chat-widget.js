@@ -79,6 +79,27 @@ function formatWidgetMessage(text) {
     .replace(/$/, '</p>');
 }
 
+const WIDGET_SUGGESTIONS = [
+  '🎯 Pehla qadam kya hoga?',
+  '💰 Fiverr kaise shuru karoon?',
+  '🤖 Coding nahi aati, phir bhi paise kama sakta hoon?',
+  '💡 Mujhe ek niche choose karna hai',
+  '🚀 Pehla client kaise milega?',
+  '🎙️ Wispr Flow kaise install karoon?',
+  '📱 App kaise banaun bina coding?',
+  '✨ Claude Pro lena chahiye?'
+];
+
+function renderQuickSuggestions() {
+  return `
+    <div class="widget-quick-row">
+      ${WIDGET_SUGGESTIONS.slice(0, 6).map(s =>
+        `<button class="widget-quick-chip" onclick="askWidgetSuggestion('${s.replace(/'/g, "\\'")}')">${s}</button>`
+      ).join('')}
+    </div>
+  `;
+}
+
 function renderWidgetMessages() {
   const container = document.getElementById('widget-messages');
   if (!container) return;
@@ -88,13 +109,13 @@ function renderWidgetMessages() {
     container.innerHTML = `
       <div class="widget-msg bot">
         <p><strong>Asalaam-o-Alaikum! 👋</strong></p>
-        <p>Main AI Talha hoon. Pucho, kya help chahiye?</p>
+        <p>Main AI Talha hoon. Roman Urdu mein bolo, custom guidance dunga.</p>
       </div>
       <div class="widget-suggestions">
-        <button onclick="askWidgetSuggestion('Pehla qadam kya hoga?')">Pehla qadam kya hoga?</button>
-        <button onclick="askWidgetSuggestion('Fiverr kaise shuru karoon?')">Fiverr kaise shuru karoon?</button>
-        <button onclick="askWidgetSuggestion('Coding nahi aati, kya karoon?')">Coding nahi aati, kya karoon?</button>
-        <button onclick="askWidgetSuggestion('Mujhe ek niche choose karna hai')">Niche choose karna hai</button>
+        <div class="widget-suggestions-title">Yeh sawal pochha kar sakte ho:</div>
+        ${WIDGET_SUGGESTIONS.map(s =>
+          `<button onclick="askWidgetSuggestion('${s.replace(/'/g, "\\'")}')">${s}</button>`
+        ).join('')}
       </div>
     `;
     return;
@@ -106,6 +127,11 @@ function renderWidgetMessages() {
     div.innerHTML = formatWidgetMessage(msg.content);
     container.appendChild(div);
   });
+
+  // Update quick suggestions strip below messages
+  const quickStrip = document.getElementById('widget-quick-strip');
+  if (quickStrip) quickStrip.innerHTML = renderQuickSuggestions();
+
   container.scrollTop = container.scrollHeight;
 }
 
@@ -334,6 +360,8 @@ function injectChatWidget() {
 
       <div id="widget-messages" class="widget-messages"></div>
 
+      <div id="widget-quick-strip" class="widget-quick-strip"></div>
+
       <div class="widget-input-row">
         <input type="text" id="widget-input" class="widget-input" placeholder="Apna sawaal yahan likho..." autocomplete="off" />
         <button id="widget-send" onclick="handleWidgetSend()" class="widget-send" aria-label="Send">↑</button>
@@ -528,13 +556,21 @@ function injectChatWidget() {
         display: flex;
         flex-direction: column;
         gap: 6px;
-        margin-top: 8px;
+        margin-top: 12px;
         padding: 0 4px;
+      }
+      .widget-suggestions-title {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0 4px 6px;
       }
       .widget-suggestions button {
         background: white;
         border: 1px solid var(--line);
-        padding: 8px 12px;
+        padding: 10px 14px;
         border-radius: 100px;
         font-family: inherit;
         font-size: 13px;
@@ -542,11 +578,52 @@ function injectChatWidget() {
         cursor: pointer;
         text-align: left;
         transition: all 0.15s;
+        font-weight: 500;
       }
       .widget-suggestions button:hover {
         border-color: var(--green);
         color: var(--green);
         background: var(--green-light);
+      }
+
+      /* Quick suggestion strip (visible during conversation) */
+      .widget-quick-strip {
+        padding: 8px 12px 4px;
+        background: white;
+        border-top: 1px solid var(--line);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .widget-quick-strip:not(:empty) {
+        max-height: 60px;
+      }
+      .widget-quick-row {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 6px;
+        scrollbar-width: none;
+      }
+      .widget-quick-row::-webkit-scrollbar { display: none; }
+      .widget-quick-chip {
+        flex-shrink: 0;
+        background: var(--green-light);
+        border: 1px solid rgba(0,168,107,0.25);
+        padding: 6px 12px;
+        border-radius: 100px;
+        font-family: inherit;
+        font-size: 11px;
+        color: var(--green-dark);
+        cursor: pointer;
+        white-space: nowrap;
+        font-weight: 600;
+        transition: all 0.15s;
+      }
+      .widget-quick-chip:hover {
+        background: var(--green);
+        color: white;
+        border-color: var(--green);
       }
 
       .widget-input-row {
