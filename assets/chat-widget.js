@@ -24,7 +24,7 @@ Pricing context:
 Stay focused on AI/freelancing/earning topics. Politely redirect if asked about politics, religion, personal matters, harmful content.`;
 
 const WIDGET_CONFIG = {
-  OPENROUTER_API_KEY: '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',
+  OPENROUTER_API_KEY: '',
   MODEL: 'openai/gpt-oss-120b:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 800,
