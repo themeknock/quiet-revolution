@@ -21,6 +21,7 @@ const NAV_STRUCTURE = [
   {
     title: 'Paise Kaise Kamao',
     items: [
+      { href: '/pages/business-ideas.html', icon: '💡', label: '100+ Business Ideas' },
       { href: '/pages/fiverr-guide.html', icon: '💰', label: 'Fiverr Guide' },
       { href: '/pages/upwork-guide.html', icon: '🌍', label: 'Upwork Guide' },
       { href: '/pages/content-writing.html', icon: '📝', label: 'Content Writing' },
