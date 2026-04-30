@@ -3,8 +3,127 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Apps Banao, The Quiet Revolution</title>
+<title>Apps Banao, Talha's AI Guide</title>
 <link rel="stylesheet" href="../assets/styles.css" />
+<style>
+  .ask-callout {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: white;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ask-callout-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+  .ask-callout-content {
+    flex: 1;
+    min-width: 200px;
+  }
+  .ask-callout h4 {
+    color: white;
+    font-size: 16px;
+    margin: 0 0 4px;
+    font-weight: 700;
+  }
+  .ask-callout p {
+    color: rgba(255,255,255,0.9);
+    font-size: 14px;
+    margin: 0;
+  }
+  .ask-callout a {
+    background: white;
+    color: var(--green);
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-weight: 700;
+    font-size: 13px;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .ask-callout a:hover {
+    background: rgba(255,255,255,0.95);
+  }
+
+  .voice-flow {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin: 24px 0;
+  }
+  @media (max-width: 700px) {
+    .voice-flow { grid-template-columns: 1fr; }
+    .voice-flow .arrow { display: none; }
+  }
+  .voice-node {
+    background: white;
+    border: 2px solid var(--green);
+    border-radius: 14px;
+    padding: 18px 14px;
+    text-align: center;
+  }
+  .voice-node .vn-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+  .voice-node .vn-title {
+    font-weight: 700;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .voice-node .vn-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .voice-flow .arrow {
+    color: var(--green);
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .voice-prompt-demo {
+    background: #0a1410;
+    border-radius: 14px;
+    padding: 20px 24px;
+    color: #e0e0e0;
+    margin: 16px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    position: relative;
+    overflow: hidden;
+  }
+  .voice-prompt-demo::before {
+    content: '🎙️ Voice Input';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 10px;
+    color: var(--green);
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .voice-prompt-demo .label {
+    color: var(--green);
+    font-weight: 600;
+    margin-right: 8px;
+  }
+</style>
 </head>
 <body>
 
@@ -14,184 +133,272 @@
   <main class="main">
 
     <div class="page-header fade-up">
-      <div class="page-tag">Build · No Coding Required</div>
-      <h1>Apps Banao, Coding Aaye Bagair</h1>
+      <div class="page-tag">Build · Bolne Se Apps</div>
+      <h1>Apps Banao, Sirf Bolne Se</h1>
       <p class="lead">
-        Maine khud coding nahi seekhi thi. Aaj ThemeKnock ke 3 apps live chal rahe hain.
-        Yahan exact tarika hai, kaise tum bhi <strong>bolne se</strong> apps bana sakte ho.
+        Coding seekhne ki zaroorat nahi. TypeScript, React, kuch nahi. Bas Claude Code ko bolo,
+        tumhari poori app ban jaati hai. Mein khud yahi karta hoon ThemeKnock pe.
       </p>
     </div>
 
     <section class="fade-up">
-      <h2>"App" Kya Hota Hai?</h2>
-      <p>"App" ka matlab confused mat ho. Yeh kuch bhi ho sakti hai:</p>
+      <h2>Pehle, Honest Baat</h2>
+      <p>
+        Maine khud coding nahi seekhi. Ek line nahi aati thi mujhe. Aaj ThemeKnock ke 3 apps live chal rahe hain,
+        client use kar rahe hain. Sab Claude Code se banayi hain, <strong>bolne se</strong>.
+      </p>
+      <p>
+        Iska matlab samjho, tum HTML/CSS/JS seekhne ke baad apps nahi banaate. Tum <strong>Claude ko bolte ho</strong>,
+        Claude apne aap modern stack (Next.js, TypeScript, database, sab kuch) use karke poori app deta hai.
+      </p>
+    </section>
+
+    <div class="ask-callout">
+      <div class="ask-callout-icon">💬</div>
+      <div class="ask-callout-content">
+        <h4>Samajh Nahi Aaya?</h4>
+        <p>Bilkul normal hai. Ask Talha AI ko apna scenario batao, custom plan milega.</p>
+      </div>
+      <a href="ask-talha.html">Ask Talha AI →</a>
+    </div>
+
+    <section class="fade-up">
+      <h2>Iske Liye Kya Chahiye</h2>
       <ul>
-        <li><strong>Website</strong>, har koi browser mein use karta hai</li>
-        <li><strong>Web app</strong>, interactive website (form, calculator, dashboard)</li>
-        <li><strong>Telegram/WhatsApp bot</strong>, messaging mein chalti hai</li>
-        <li><strong>Browser extension</strong>, Chrome ke andar tool</li>
-        <li><strong>Mobile app</strong>, phone pe install hoti hai (most complex)</li>
+        <li><strong>Claude Pro Subscription, $20/mo</strong>, Claude Code ke liye zaroori hai. Yahi tumhari coding karega.</li>
+        <li><strong>Wispr Flow</strong>, voice se prompt likhne ke liye. Free trial use kar sakte ho.</li>
+        <li><strong>Laptop</strong>, Mac ya Windows. Phone se bhi possible hai lekin laptop better.</li>
+        <li><strong>GitHub account</strong>, free, hosting + code save karne ke liye.</li>
       </ul>
-      <p>Beginner ke liye <strong>web apps</strong> sabse easy. Wahin se start.</p>
+      <div class="callout">
+        <p><strong>Total monthly cost:</strong> Sirf $20 (Claude Pro) + $15 (Wispr Pro optional). Pehle 1 app bechh ke recover kar lo.</p>
+      </div>
     </section>
 
     <section class="fade-up">
-      <h2>Tools You Need</h2>
-      <ul>
-        <li><strong>Claude.ai</strong>, code likhne ke liye</li>
-        <li><strong>VS Code</strong>, free code editor (<a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>)</li>
-        <li><strong>Browser</strong>, testing ke liye (Chrome / Edge)</li>
-        <li><strong>GitHub</strong>, code save + free hosting (sab ek jagah)</li>
-      </ul>
-      <p>Sab free hai. Total cost: $0.</p>
+      <h2>Magic Workflow, 4 Steps</h2>
+      <div class="voice-flow">
+        <div class="voice-node">
+          <div class="vn-icon">💡</div>
+          <div class="vn-title">Idea</div>
+          <div class="vn-desc">Tum sochte ho</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="voice-node">
+          <div class="vn-icon">🎙️</div>
+          <div class="vn-title">Wispr</div>
+          <div class="vn-desc">Tum bolte ho</div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="voice-node" style="border-color: var(--orange);">
+          <div class="vn-icon">⚡</div>
+          <div class="vn-title">Claude Code</div>
+          <div class="vn-desc">Code likhta hai</div>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 16px;">
+        <strong>Tum kabhi code nahi dekhte.</strong> Tumhe pata bhi nahi hota TypeScript hai ya React. Bas app chal rahi hai.
+      </p>
     </section>
 
     <section class="fade-up">
-      <h2>Pehla App, Step By Step</h2>
-      <p>Chalo ek simple app banate hain, <strong>"Daily Quote Generator"</strong></p>
+      <h2>Real Example, Aaj Ka Mera Project</h2>
+      <p>Kal client ne bola: <em>"Salon ke liye online booking system chahiye."</em> Maine kya kiya:</p>
 
       <div class="step-card">
         <div class="step-num">1</div>
-        <h3>Idea Define Karo</h3>
-        <p>Specific raho. "Daily Quote Generator" ka matlab:</p>
-        <ul>
-          <li>Webpage khulta hai, ek quote dikhata hai</li>
-          <li>"New Quote" button, naya quote</li>
-          <li>"Share" button, Twitter pe share</li>
-        </ul>
+        <h3>Wispr Daboo, Bola</h3>
+        <div class="voice-prompt-demo">
+          <span class="label">Voice:</span> Mujhe ek booking system banao salon ke liye. Customer apna naam, phone, kaunsa service chahiye, date, time slot select kare. WhatsApp pe automatic confirmation message jaye. Mobile-friendly modern design. Green theme.
+        </div>
       </div>
 
       <div class="step-card">
         <div class="step-num">2</div>
-        <h3>Claude Ko Bolo</h3>
-        <div class="prompt-box">
-          <button class="copy-btn" onclick="copyPrompt(this)">Copy</button>
-          <div class="prompt-text">Mujhe ek simple web app banao, Daily Quote Generator.
-
-Features:
-- Single HTML file (HTML + CSS + JS sab ek file mein)
-- Beautiful dark theme, modern design
-- 30 inspirational quotes hardcoded array mein
-- Page load pe random quote dikhao
-- "New Quote" button, refresh karega
-- "Share on Twitter" button
-- Mobile responsive
-
-Quotes "motivational" type hon. Author ka name bhi include karo.
-
-Pure HTML/CSS/JS, koi external library nahi.</div>
-        </div>
+        <h3>Claude Code Apne Aap Banata Hai</h3>
+        <p>Claude Code khud:</p>
+        <ul>
+          <li>Modern Next.js + TypeScript app banata hai</li>
+          <li>Database connect karta hai (Supabase)</li>
+          <li>WhatsApp integration karta hai</li>
+          <li>Mobile responsive design</li>
+          <li>Sab files banake save kar deta hai</li>
+        </ul>
+        <p><strong>Mujhe kuch nahi karna.</strong> Bas dekhta hoon.</p>
       </div>
 
       <div class="step-card">
         <div class="step-num">3</div>
-        <h3>Code Save Karo</h3>
-        <p>Claude ka output copy karo. VS Code mein nayi file banao, <code>index.html</code>. Code paste karo. Save.</p>
+        <h3>Test + Adjust</h3>
+        <p>App chal rahi hai local pe. Kuch change chahiye? Phir bolo:</p>
+        <div class="voice-prompt-demo">
+          <span class="label">Voice:</span> Booking confirmation mein customer ka naam highlight karo. Time slots 30-30 minute ke karo. Logo upload karne ka option de.
+        </div>
+        <p>Claude Code 5 minute mein update kar deta hai.</p>
       </div>
 
       <div class="step-card">
         <div class="step-num">4</div>
-        <h3>Test Karo</h3>
-        <p>VS Code mein right click → "Open with Live Server" (extension install karo pehle). Browser mein khulega, apna app dekho!</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-num">5</div>
-        <h3>Improve Karo</h3>
-        <p>Kuch dekh ke pasand nahi? Claude ko phir bolo:</p>
-        <ul>
-          <li>"Background green theme kar do"</li>
-          <li>"Quote ke neeche ek small icon add karo"</li>
-          <li>"Animation add karo new quote pe"</li>
-        </ul>
-        <p>Iterate karte raho.</p>
-      </div>
-
-      <div class="step-card">
-        <div class="step-num">6</div>
-        <h3>Deploy, Live Karo</h3>
-        <p>GitHub Pages pe live karo (sirf yahi tool kaafi hai):</p>
-        <ol>
-          <li><a href="https://github.com" target="_blank">github.com</a> pe sign up (free)</li>
-          <li>Naya repository banao, public</li>
-          <li>Apni files upload karo</li>
-          <li>Settings, Pages, Source: main branch, Save</li>
-          <li>1 minute mein live URL mil jata hai</li>
-        </ol>
-        <p>Apna app ab internet pe hai, bilkul free!</p>
-        <p><a href="free-hosting.html" class="btn btn-outline">Full Hosting Guide →</a></p>
+        <h3>Live Karo</h3>
+        <p>GitHub pe push, GitHub Pages enable, ya Vercel pe deploy. Claude Code yeh bhi khud kar sakta hai.</p>
+        <p>Client ko link bheja. Done. <strong>Total time: 45 minute.</strong></p>
       </div>
     </section>
 
+    <div class="ask-callout">
+      <div class="ask-callout-icon">🤔</div>
+      <div class="ask-callout-content">
+        <h4>Yeh Padhke Confused Lag Raha Hai?</h4>
+        <p>Bilkul okay hai. Ask Talha AI se step-by-step custom guidance lo, tumhare scenario ke hisaab se.</p>
+      </div>
+      <a href="ask-talha.html">Sawal Pucho →</a>
+    </div>
+
     <section class="fade-up">
-      <h2>Real App Ideas, Bechh Sakte Ho</h2>
+      <h2>Kya Apps Ban Sakti Hain?</h2>
+      <p>Lagbhag <strong>kuch bhi</strong>. Yeh sab maine bolne se banayi hain ya tum bana sakte ho:</p>
 
       <div class="card-grid">
         <div class="card">
           <div class="card-icon">📅</div>
-          <div class="card-title">Booking System</div>
-          <div class="card-desc">Salon, doctor, tuition centers ke liye. Sell @ $300-500.</div>
+          <div class="card-title">Booking Systems</div>
+          <div class="card-desc">Salon, doctor, tuition, gym. Sell @ Rs. 12,000-30,000.</div>
         </div>
         <div class="card">
-          <div class="card-icon">💼</div>
-          <div class="card-title">Resume Builder</div>
-          <div class="card-desc">Pakistani job seekers ke liye. Free + paid templates.</div>
+          <div class="card-icon">🏪</div>
+          <div class="card-title">POS Apps</div>
+          <div class="card-desc">Kiryana, garments shops. Billing + inventory.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <div class="card-title">Restaurant Menu</div>
+          <div class="card-desc">QR menu, online order. Restaurants ke liye.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">📚</div>
+          <div class="card-title">School Management</div>
+          <div class="card-desc">Attendance, fees, parent notifications.</div>
+        </div>
+        <div class="card">
+          <div class="card-icon">🛒</div>
+          <div class="card-title">E-commerce Stores</div>
+          <div class="card-desc">Custom Pakistani brand stores. JazzCash integration.</div>
         </div>
         <div class="card">
           <div class="card-icon">📊</div>
-          <div class="card-title">Expense Tracker</div>
-          <div class="card-desc">Personal finance. Sell @ $50-100 to small businesses.</div>
+          <div class="card-title">Dashboards</div>
+          <div class="card-desc">Business analytics, reports, charts.</div>
         </div>
-        <div class="card">
-          <div class="card-icon">🍔</div>
-          <div class="card-title">Restaurant Menu</div>
-          <div class="card-desc">Digital menu with QR. Sell @ $200 per restaurant.</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">🎓</div>
-          <div class="card-title">Quiz App</div>
-          <div class="card-desc">Schools, tuition centers ke liye. Custom quizzes.</div>
-        </div>
-        <div class="card">
-          <div class="card-icon">📦</div>
-          <div class="card-title">Inventory Manager</div>
-          <div class="card-desc">Small shops ke liye. $300-600 setup.</div>
-        </div>
+      </div>
+
+      <p style="margin-top: 20px;"><strong>Aur 100+ ideas:</strong></p>
+      <p><a href="business-ideas.html" class="btn btn-outline">All Business Ideas →</a></p>
+    </section>
+
+    <section class="fade-up">
+      <h2>Claude Code Setup, 5 Minute</h2>
+
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Claude Pro Subscribe Karo</h3>
+        <p><a href="https://claude.ai" target="_blank">claude.ai</a> pe jao, Settings, Plan, Upgrade to Pro ($20/mo).</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Claude Desktop App Install Karo</h3>
+        <p><a href="https://claude.ai/download" target="_blank">claude.ai/download</a> se Mac/Windows app download karo.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Claude Code Activate Karo</h3>
+        <p>Desktop app mein Claude Code feature on karo, Settings se. Yeh code likhne wala feature hai.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Wispr Flow Install Karo</h3>
+        <p><a href="https://wisprflow.ai" target="_blank">wisprflow.ai</a> se download karo. <a href="wispr-setup.html">Full setup guide</a>.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h3>Pehla Project Banao</h3>
+        <p>Claude Code kholo, Wispr daboo, bolo: <em>"Mujhe ek simple to-do list app banao."</em> 2 minute mein ready.</p>
       </div>
     </section>
 
-    <section class="fade-up">
-      <h2>Common Mistakes, Pehle Apps Mein</h2>
-      <ul>
-        <li><strong>Bohot complex idea</strong>, pehle simple banao. Confidence build hone do.</li>
-        <li><strong>Code samjhe bagair copy paste</strong>, Claude se sawaal pucho jab samajh nahi aaye</li>
-        <li><strong>Errors aane pe ghabra jana</strong>, error message Claude ko paste karo, woh fix kar dega</li>
-        <li><strong>Deploy nahi karna</strong>, live link bina app useless hai. Always deploy.</li>
-        <li><strong>Pehle perfect karna chahna</strong>, v1 launch karo, phir improve. Ship beats perfect.</li>
-      </ul>
-    </section>
+    <div class="ask-callout">
+      <div class="ask-callout-icon">🚀</div>
+      <div class="ask-callout-content">
+        <h4>Setup Mein Stuck Ho?</h4>
+        <p>Ek bhi step pe atak gaye? Ask Talha AI ko exact problem batao, fix bata dega.</p>
+      </div>
+      <a href="ask-talha.html">Help Lo →</a>
+    </div>
 
     <section class="fade-up">
-      <h2>Advanced, Real Apps</h2>
-      <p>Beginner level cross karne ke baad, yeh learn karo:</p>
-      <ul>
-        <li><strong>Database connect karna</strong>, Supabase free tier</li>
-        <li><strong>User authentication</strong>, login system</li>
-        <li><strong>Payment integration</strong>, Stripe / JazzCash</li>
-        <li><strong>API integrations</strong>, external services connect karna</li>
-        <li><strong>Email sending</strong>, Resend, Sendgrid</li>
-      </ul>
-      <p>Yeh sab Claude ke saath karo. Ek topic ek time. Slow but steady.</p>
+      <h2>Common Confusions, Clear Karo</h2>
+
+      <h3>"Mujhe coding aati nahi, kya Claude Code chalega?"</h3>
+      <p><strong>Haan</strong>, yahi point hai. Claude Code tumhare liye coding karta hai. Tum sirf bolte ho kya chahiye.</p>
+
+      <h3>"TypeScript, React, Next.js ka matlab kya hai?"</h3>
+      <p>Yeh modern web app banane ke tools hain. <strong>Tumhe samajhne ki zaroorat nahi.</strong> Claude Code yeh sab use karta hai khud, tumhe sirf result milta hai (working app).</p>
+
+      <h3>"Claude Pro $20 affordable nahi hai abhi"</h3>
+      <p>Theek hai, pehle <a href="content-writing.html">content writing</a> ya <a href="fiverr-guide.html">Fiverr</a> se shuru karo. Pehla $50-100 kamao, phir Claude Pro lo.</p>
+
+      <h3>"Phone se ho sakta hai?"</h3>
+      <p>Claude Code laptop required hai. Phone pe browser version chal sakti hai lekin Claude Code feature laptop pe better.</p>
+
+      <h3>"Apps banake bechhta kaise hoon?"</h3>
+      <p>Local businesses ko pitch karo. Family/dosto se referrals. Fiverr pe gigs banao. Detailed: <a href="business-ideas.html">100+ ideas</a> aur <a href="automation.html">automation services</a>.</p>
     </section>
 
     <hr class="divider" />
 
     <section class="fade-up">
+      <h2>Mistakes Yeh Mat Karna</h2>
+      <ul>
+        <li><strong>Pehle TypeScript/React seekhne lag jaana,</strong> waste of time, Claude Code khud handle karta hai.</li>
+        <li><strong>Bohot complex idea pehle try karna,</strong> simple to-do list se shuru karo.</li>
+        <li><strong>Errors aane pe ghabra jaana,</strong> error message Claude Code ko paste karo, fix kar dega.</li>
+        <li><strong>Sirf seekhna, banana nahi,</strong> 1 hafta seekhne se 1 din banane mein zyaada milta hai.</li>
+        <li><strong>Free model use karna apps build karne ke liye,</strong> Claude Pro chahiye coding ke liye, Free model sirf basic chat ke liye hai.</li>
+      </ul>
+    </section>
+
+    <section class="fade-up">
+      <h2>Important, Yaad Rakho</h2>
+      <div class="card">
+        <div class="card-icon">💎</div>
+        <p class="card-desc" style="font-size: 17px; color: var(--text-2);">
+          Tum coder banne nahi aa rahe. Tum <strong>problem solver</strong> ban rahe ho.
+          Coding karne wale tools hain, tumhara kaam hai problem identify karna aur business banake bechana.
+          <em>Tools ke baare mein zyaada mat sochna, results pe focus karo.</em>
+        </p>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <div class="ask-callout">
+      <div class="ask-callout-icon">💬</div>
+      <div class="ask-callout-content">
+        <h4>Apna Custom App Plan Chahiye?</h4>
+        <p>Ask Talha AI ko apna idea batao, mein step-by-step roadmap dunga, kya banao, kaise banao, kaise becho.</p>
+      </div>
+      <a href="ask-talha.html">Ask Talha AI →</a>
+    </div>
+
+    <section class="fade-up">
       <h2>Next Step</h2>
-      <p>Apps banane se confidence aaya? Acha. Ab <strong>image generation</strong> bhi seekho, visual content business ka 50% hai.</p>
+      <p>Apps banao samjh aaya? Acha. Ab dekho <strong>image generation</strong>, visual content business ka 50% hai.</p>
       <div class="btn-row">
         <a href="image-generation.html" class="btn">Image Generation →</a>
-        <a href="prompts-library.html" class="btn btn-outline">Prompts Library</a>
+        <a href="business-ideas.html" class="btn btn-outline">Business Ideas</a>
       </div>
     </section>
 
