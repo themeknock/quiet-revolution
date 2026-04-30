@@ -6,7 +6,7 @@ const NAV_STRUCTURE = [
   {
     title: 'Shuru Karo',
     items: [
-      { href: '/index.html', icon: '🏠', label: 'Home' },
+      { href: '/', icon: '🏠', label: 'Home' },
       { href: '/pages/start-here/', icon: '🎯', label: 'Start Here' },
     ]
   },
@@ -52,9 +52,11 @@ function renderSidebar() {
   const currentPath = window.location.pathname.replace(/\/$/, '') || '/index.html';
   const isHome = currentPath === '/' || currentPath.endsWith('index.html') && !currentPath.includes('/pages/');
 
-  // Build base path - if we're in /pages/, links should be relative
-  const inPages = currentPath.includes('/pages/');
-  const linkPrefix = inPages ? '..' : '.';
+  // Determine depth from root for relative links
+  // - / (homepage)            → linkPrefix = '.'
+  // - /pages/foo/             → linkPrefix = '../..' (2 levels deep)
+  const inPagesSubfolder = /\/pages\/[^/]+\/?(index\.html)?$/.test(currentPath);
+  const linkPrefix = inPagesSubfolder ? '../..' : '.';
 
   let html = `
     <div class="brand">
