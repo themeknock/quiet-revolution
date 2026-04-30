@@ -61,13 +61,6 @@ function renderSidebar() {
       <div class="brand-name">Talha's AI <span class="accent">Guide</span></div>
       <div class="brand-tag">Pakistan · ThemeKnock</div>
     </div>
-    <div id="translator-widget" style="margin-bottom: 18px; padding: 0 12px;">
-      <div style="font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted-2); margin-bottom: 6px;">Language</div>
-      <div style="display: flex; gap: 6px;">
-        <button onclick="setLang('roman')" id="lang-roman" class="lang-btn active">🇵🇰 Roman</button>
-        <button onclick="setLang('en')" id="lang-en" class="lang-btn">🇬🇧 English</button>
-      </div>
-    </div>
   `;
 
   NAV_STRUCTURE.forEach(section => {
@@ -184,8 +177,6 @@ function syncLangButtons() {
 // Init on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   renderSidebar();
-  initGoogleTranslate();
-  syncLangButtons();
 
   // Add mobile nav button
   if (!document.querySelector('.mobile-nav-btn')) {
