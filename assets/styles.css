@@ -730,6 +730,66 @@ li::marker { color: var(--green); }
 }
 .pulse { animation: pulse-soft 2s ease-in-out infinite; }
 
+/* OS / Path Selector (interactive helper) */
+.os-selector, .path-selector {
+  background: linear-gradient(135deg, var(--green-light), white);
+  border: 1px solid rgba(0,168,107,0.25);
+  border-radius: 16px;
+  padding: 24px;
+  margin: 28px 0;
+  text-align: center;
+}
+.os-selector h3, .path-selector h3 {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.os-selector p, .path-selector p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+.os-buttons, .path-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.os-btn, .path-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid var(--line);
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.os-btn:hover, .path-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+.os-btn.active, .path-btn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+  box-shadow: 0 6px 16px rgba(0,168,107,0.3);
+}
+.os-btn-icon {
+  font-size: 18px;
+}
+
+/* Smooth show/hide for OS-specific content */
+.step-card[data-os] {
+  transition: opacity 0.3s ease;
+}
+
 /* Language toggle buttons */
 .lang-btn {
   flex: 1;

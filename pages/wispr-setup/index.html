@@ -14,156 +14,155 @@
   <main class="main">
 
     <div class="page-header fade-up">
-      <div class="page-tag">Tool 02 · Setup Guide</div>
-      <h1>Wispr Flow, Bolo, Likh Jaye.</h1>
+      <div class="page-tag">Tool 02 · Step by Step</div>
+      <h1>Wispr Flow Setup Karo</h1>
       <p class="lead">
-        Type karne ki bajaye bolo. Wispr sun ke khud likh deta hai, kahin bhi, kisi bhi app mein.
-        5x faster. Roman Urdu samajhta hai.
+        Bolo, likh jaye. Type karne ki bajaye voice se prompt likhna 5x faster hai.
+        Mein yeh poora resource bhi <strong>bolke banwaya hai</strong>.
       </p>
     </div>
 
-    <section class="fade-up">
-      <h2>Wispr Flow Kya Hai?</h2>
-      <p>
-        Wispr Flow ek voice-to-text app hai jo background mein chalta hai. Tum hotkey daboo, bolna shuru karo 
-        text apne aap aata hai jis text box mein cursor hai. <strong>Email, WhatsApp, Claude, Word, sab mein.</strong>
-      </p>
-      <ul>
-        <li>5x faster than typing, 200+ words per minute</li>
-        <li>Roman Urdu, English, mixed, sab samajhta hai</li>
-        <li>Auto-corrects grammar, fillers (umm, ahh) hata deta hai</li>
-        <li>Background mein chalta hai, ek baar setup phir hamesha</li>
-      </ul>
-    </section>
-
-    <section class="fade-up">
-      <h2>Pakistani Context, Yeh Game Changer Hai</h2>
-      <div class="callout">
-        <p>
-          Pakistan mein bohot students ko English likhna mushkil lagta hai. <strong>Bolne mein zyada comfortable.</strong>
-          Wispr usi ko exploit karta hai, bolo, likh deta hai, AI tools mein paste karo. Bas.
-        </p>
-        <p class="mb-0">
-          Main yeh poora resource bhi <strong>bolke banwaya hai</strong>. Type ek line nahi ki.
-        </p>
+    <!-- INTERACTIVE OS SELECTOR -->
+    <div class="os-selector">
+      <h3>Pehle batao, tumhara device kya hai?</h3>
+      <p>Tumhe sirf relevant steps dikhaunga, baaki sab hide.</p>
+      <div class="os-buttons">
+        <button class="os-btn" data-os="mac" onclick="setOS('mac')">
+          <span class="os-btn-icon">🍎</span> macOS
+        </button>
+        <button class="os-btn" data-os="win" onclick="setOS('win')">
+          <span class="os-btn-icon">🪟</span> Windows
+        </button>
+        <button class="os-btn" data-os="android" onclick="setOS('android')">
+          <span class="os-btn-icon">📱</span> Phone (Android/iOS)
+        </button>
       </div>
-    </section>
+    </div>
 
-    <section class="fade-up">
+    <!-- SETUP STEPS - mac/win only -->
+    <section class="fade-up" data-os="mac,win">
       <h2>Setup, 3 Steps</h2>
 
-      <div class="step-card">
+      <div class="step-card" data-os="mac,win">
         <div class="step-num">1</div>
-        <h3>Download Karo</h3>
-        <p>Apne computer pe Wispr Flow download karo:</p>
-        <ul>
-          <li>Mac: <a href="https://wisprflow.ai" target="_blank">wisprflow.ai</a> → Download</li>
-          <li>Windows: <a href="https://wisprflow.ai" target="_blank">wisprflow.ai</a> → Download for Windows</li>
-        </ul>
-        <p><a href="https://wisprflow.ai" target="_blank" class="btn btn-outline">wisprflow.ai Open Karo →</a></p>
+        <h3>Wispr Flow Download Karo</h3>
+        <span data-os="mac"><a href="https://wisprflow.ai" target="_blank" class="btn btn-outline">Download for Mac →</a></span>
+        <span data-os="win"><a href="https://wisprflow.ai" target="_blank" class="btn btn-outline">Download for Windows →</a></span>
       </div>
 
-      <div class="step-card">
+      <div class="step-card" data-os="mac">
         <div class="step-num">2</div>
-        <h3>Install + Permissions</h3>
-        <p>Install karo. Phir yeh permissions allow karo:</p>
+        <h3>Install + Permissions (Mac)</h3>
         <ul>
-          <li><strong>Microphone</strong>, bolne ke liye</li>
-          <li><strong>Accessibility</strong>, text auto-paste karne ke liye</li>
+          <li>Downloaded <code>.dmg</code> file open karo</li>
+          <li>Wispr icon ko Applications mein drag karo</li>
+          <li>Applications se Wispr open karo</li>
+          <li>Pop-up aayega permissions ke liye, "Open System Settings" click</li>
+          <li><strong>Microphone:</strong> Wispr toggle ON karo</li>
+          <li><strong>Accessibility:</strong> Wispr toggle ON karo (text auto-paste ke liye zaroori)</li>
         </ul>
-        <p>Mac pe: System Settings → Privacy & Security → Wispr ko enable karo dono jagah.</p>
-        <p>Windows pe: ek baar permissions popup aayega, "Allow" pe click.</p>
       </div>
 
-      <div class="step-card">
+      <div class="step-card" data-os="win">
+        <div class="step-num">2</div>
+        <h3>Install + Permissions (Windows)</h3>
+        <ul>
+          <li>Downloaded <code>.exe</code> file run karo</li>
+          <li>Installer next-next karo, default settings rakho</li>
+          <li>Install hone pe Wispr open karo</li>
+          <li>Windows microphone permission popup aayega, "Allow" click</li>
+          <li>Sign in karo apne email se (free trial active ho jata hai)</li>
+        </ul>
+      </div>
+
+      <div class="step-card" data-os="mac,win">
         <div class="step-num">3</div>
         <h3>Hotkey Set Karo</h3>
-        <p>Default hotkey hai <code>Fn</code> (function key), usse hold karke bolo.</p>
-        <p>Agar Fn comfortable nahi, apni custom hotkey set kar sakte ho:</p>
-        <ul>
-          <li><code>Right Option</code> (Mac), sabse common</li>
-          <li><code>Right Ctrl</code> (Windows), recommended</li>
-          <li><code>Caps Lock</code>, agar use nahi karte</li>
-        </ul>
+        <p data-os="mac">Default hotkey: <code>Fn</code> key. Press karke hold + bolo.</p>
+        <p data-os="win">Default hotkey: <code>Right Ctrl</code>. Press karke hold + bolo.</p>
+        <p>Custom hotkey chahiye? Settings, Hotkey, koi bhi key choose karo.</p>
       </div>
     </section>
 
-    <section class="fade-up">
+    <!-- HOW TO USE - mac/win -->
+    <section class="fade-up" data-os="mac,win">
       <h2>Use Karne Ka Tarika</h2>
 
-      <div class="step-card">
+      <div class="step-card" data-os="mac,win">
         <div class="step-num">1</div>
         <h3>Cursor Wahan Rakho</h3>
-        <p>Jis text box mein likhna hai, wahan click karo. Cursor wahan ho.</p>
+        <p>Jis app mein likhna hai (WhatsApp, email, Claude, kuch bhi), us text box mein click karo. Cursor blink kar raha hona chahiye.</p>
       </div>
 
-      <div class="step-card">
+      <div class="step-card" data-os="mac,win">
         <div class="step-num">2</div>
-        <h3>Hotkey Daboo + Bolo</h3>
-        <p>Hotkey hold karo. Bolna shuru karo, naturally, jaise dost se baat kar rahe ho.</p>
+        <h3>Hotkey Daboo, Bolo</h3>
+        <p data-os="mac"><code>Fn</code> hold karo, bolna shuru karo:</p>
+        <p data-os="win"><code>Right Ctrl</code> hold karo, bolna shuru karo:</p>
         <ul>
-          <li>"Comma," "full stop," "naya paragraph", bolne se punctuation aati hai</li>
-          <li>"Backspace karo", last word remove</li>
+          <li>Naturally bolo, jaise dost se baat kar rahe ho</li>
+          <li>"Comma", "full stop", "naya paragraph", bolne se punctuation aati hai</li>
           <li>Roman Urdu mein bolo, automatically Roman likh deta hai</li>
         </ul>
       </div>
 
-      <div class="step-card">
+      <div class="step-card" data-os="mac,win">
         <div class="step-num">3</div>
         <h3>Hotkey Chhoro</h3>
-        <p>Bolna khatam, hotkey release. 1-2 second mein text aa jaata hai jahan cursor hai.</p>
-      </div>
-
-      <div class="callout">
-        <p><strong>Pro tip:</strong> Pehle pehle thoda awkward lagega, apne aap se bolna. 2-3 din baad bilkul natural ho jaata hai. Phir tum type karna bhool jaate ho.</p>
+        <p>Bolna khatam, hotkey release karo. 1-2 second mein text aa jaata hai jahan cursor tha.</p>
+        <div class="callout">
+          <p><strong>Pehli baar awkward lagega</strong> apne aap se bolna. 2-3 din mein bilkul natural ho jata hai.</p>
+        </div>
       </div>
     </section>
 
-    <section class="fade-up">
-      <h2>Wispr + Claude, Ultimate Combo</h2>
-      <p>Yeh combo hi <strong>asli power</strong> hai:</p>
+    <!-- WISPR + CLAUDE - mac/win -->
+    <section class="fade-up" data-os="mac,win">
+      <h2>Wispr + Claude, Asli Power</h2>
       <ol>
-        <li>Claude.ai kholo</li>
+        <li>Browser mein <a href="https://claude.ai" target="_blank">claude.ai</a> kholo</li>
         <li>Chat box mein cursor rakho</li>
-        <li>Wispr hotkey daboo</li>
-        <li>Bolo: "Mujhe ek email likhna hai client ke liye, bolna hai project 3 din mein deliver kar dunga, professional tone, English mein"</li>
+        <li>Hotkey daboo, bolo apna sawaal</li>
         <li>Hotkey chhoro, text aata hai</li>
         <li>Enter, Claude jawab deta hai</li>
       </ol>
-      <p><strong>Sirf 5 second ka kaam.</strong> Pehle yeh 5 minute leta tha.</p>
+      <p>Sirf <strong>5 second ka kaam</strong>. Pehle 5 minute leta tha typing mein.</p>
     </section>
 
-    <section class="fade-up">
+    <!-- PRICING - mac/win -->
+    <section class="fade-up" data-os="mac,win">
       <h2>Pricing</h2>
       <ul>
-        <li><strong>Free Plan:</strong> Daily limited words. Try karne ke liye perfect.</li>
-        <li><strong>Pro Plan ($15/mo):</strong> Unlimited words. Better accuracy.</li>
-        <li><strong>Free Trial:</strong> 7-14 din ka, dekh ke decide karo.</li>
+        <li><strong>Free Trial:</strong> 7-14 din, daily limited words</li>
+        <li><strong>Pro Plan ($15/mo):</strong> Unlimited words, better accuracy</li>
       </ul>
       <div class="callout">
-        <p><strong>Mera suggestion:</strong> Pehle 1 hafta free use karo. Jab habit ban jaye, Pro le lena. Yeh tool itna value deta hai ke $15/mo nothing hai. Mera Pro chal raha hai 1 saal se, <em>main isse bina kaam nahi kar sakta ab.</em></p>
+        <p>Pehle 1 hafta free use karo. Habit ban jaye, phir Pro lo. Pehla $50 kamao, tab tak free trial chala lo.</p>
       </div>
     </section>
 
-    <section class="fade-up">
-      <h2>Alternatives, Agar Wispr Nahi Le Sakte</h2>
-      <p>Free alternatives bhi hain:</p>
-      <ul>
-        <li><strong>Mac built-in dictation</strong>, System Settings → Keyboard → Dictation. Quality OK hai, accent issues hote hain.</li>
-        <li><strong>Google Voice Typing</strong>, Google Docs mein Tools → Voice Typing. Free aur achi hai.</li>
-        <li><strong>Whisper (open source)</strong>, agar tech-savvy ho. Free, OpenAI ka.</li>
-      </ul>
-      <p>Lekin Wispr <strong>baaki sab se 10x better</strong> hai, Roman Urdu support, accuracy, speed mein. Worth it.</p>
+    <!-- PHONE message -->
+    <section class="fade-up" data-os="android">
+      <h2>Phone Pe Wispr Nahi Chalti</h2>
+      <p>Wispr Flow sirf laptop/desktop ke liye hai (Mac aur Windows). Phone pe nahi chalti.</p>
+      <div class="callout">
+        <p><strong>Phone pe alternative:</strong></p>
+        <ul>
+          <li><strong>Claude.ai mobile app</strong> mein voice input button hai (microphone icon). Click karo, bolo, text aa jaata hai.</li>
+          <li><strong>Gboard (Google Keyboard)</strong> mein bhi voice input hai, har app mein chalta hai.</li>
+          <li><strong>WhatsApp ka voice-to-text</strong> bhi Roman Urdu samajhta hai.</li>
+        </ul>
+      </div>
+      <p>Jab tum laptop pe shift ho, Wispr proper setup kar lena.</p>
     </section>
 
-    <hr class="divider" />
-
+    <!-- COMMON FOR ALL -->
     <section class="fade-up">
-      <h2>Next Step</h2>
-      <p>Tools setup ho gaye. Ab dekho, <strong>main daily kaise kaam karta hoon</strong>.</p>
+      <h2>Atak Gaye? Mujhse Pucho</h2>
+      <p>Bottom-right wala chat button daboo, exact problem batao.</p>
       <div class="btn-row">
-        <a href="../workflow/" class="btn">Mera Workflow →</a>
-        <a href="../ask-talha/" class="btn btn-outline">💬 Ask Talha</a>
+        <a href="../ask-talha/" class="btn">💬 Ask Talha AI</a>
+        <a href="../workflow/" class="btn btn-outline">Workflow Dekho →</a>
       </div>
     </section>
 
@@ -172,5 +171,6 @@
 
 <script src="../../assets/components.js"></script>
 <script src="../../assets/chat-widget.js"></script>
+<script src="../../assets/interactive.js"></script>
 </body>
 </html>
