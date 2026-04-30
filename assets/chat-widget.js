@@ -24,13 +24,16 @@ Pricing context:
 Stay focused on AI/freelancing/earning topics. Politely redirect if asked about politics, religion, personal matters, harmful content.`;
 
 const WIDGET_CONFIG = {
-  OPENROUTER_API_KEY: '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',
+  // To enable shared API key for all visitors, paste your OpenRouter key here.
+  // Get free key: https://openrouter.ai/keys
+  // Leave empty to require each user to enter their own key.
+  OPENROUTER_API_KEY: '',
   MODEL: 'google/gemini-2.0-flash-exp:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 800,
   TEMPERATURE: 0.7,
-  SITE_URL: 'https://talhaatariq.github.io/quiet-revolution',
-  SITE_NAME: 'The Quiet Revolution'
+  SITE_URL: 'https://themeknock.github.io/quiet-revolution',
+  SITE_NAME: 'Talha AI Guide'
 };
 
 let widgetConversation = [];
@@ -38,7 +41,8 @@ let widgetIsOpen = false;
 let widgetIsLoading = false;
 
 function getWidgetApiKey() {
-  return WIDGET_CONFIG.OPENROUTER_API_KEY || localStorage.getItem('openrouter_api_key') || '';
+  // localStorage priority - user's custom key overrides default
+  return localStorage.getItem('openrouter_api_key') || WIDGET_CONFIG.OPENROUTER_API_KEY || '';
 }
 
 function setWidgetApiKey(key) {
@@ -62,9 +66,11 @@ function saveWidgetConversation() {
 }
 
 function formatWidgetMessage(text) {
+  // Already-HTML links should pass through. Markdown [text](url) → <a>
   return text
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+|javascript:[^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--green);font-weight:600;">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
     .replace(/\n\n/g, '</p><p>')
     .replace(/\n/g, '<br>')
@@ -117,6 +123,45 @@ function hideWidgetTyping() {
   if (el) el.remove();
 }
 
+// Try multiple models in case one fails
+const FALLBACK_MODELS = [
+  'google/gemini-2.0-flash-exp:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'deepseek/deepseek-chat-v3.1:free',
+  'qwen/qwen-2.5-72b-instruct:free'
+];
+
+async function tryModelRequest(apiKey, model, messages) {
+  const response = await fetch(WIDGET_CONFIG.API_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': WIDGET_CONFIG.SITE_URL,
+      'X-Title': WIDGET_CONFIG.SITE_NAME
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: messages,
+      max_tokens: WIDGET_CONFIG.MAX_TOKENS,
+      temperature: WIDGET_CONFIG.TEMPERATURE
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    return { ok: false, status: response.status, error: data.error?.message || `HTTP ${response.status}` };
+  }
+
+  const reply = data.choices?.[0]?.message?.content;
+  if (!reply) {
+    return { ok: false, status: 200, error: 'Empty response' };
+  }
+
+  return { ok: true, reply };
+}
+
 async function sendWidgetMessage(userMessage) {
   if (widgetIsLoading) return;
   const apiKey = getWidgetApiKey();
@@ -135,55 +180,70 @@ async function sendWidgetMessage(userMessage) {
   renderWidgetMessages();
   showWidgetTyping();
 
-  try {
-    const messages = [
-      { role: 'system', content: WIDGET_SYSTEM_PROMPT },
-      ...widgetConversation.slice(-10).map(m => ({ role: m.role, content: m.content }))
-    ];
+  const messages = [
+    { role: 'system', content: WIDGET_SYSTEM_PROMPT },
+    ...widgetConversation.slice(-10).map(m => ({ role: m.role, content: m.content }))
+  ];
 
-    const response = await fetch(WIDGET_CONFIG.API_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': WIDGET_CONFIG.SITE_URL,
-        'X-Title': WIDGET_CONFIG.SITE_NAME
-      },
-      body: JSON.stringify({
-        model: WIDGET_CONFIG.MODEL,
-        messages: messages,
-        max_tokens: WIDGET_CONFIG.MAX_TOKENS,
-        temperature: WIDGET_CONFIG.TEMPERATURE
-      })
-    });
+  let lastError = null;
+  let success = false;
 
-    hideWidgetTyping();
+  // Try primary model first, then fallbacks
+  const modelsToTry = [WIDGET_CONFIG.MODEL, ...FALLBACK_MODELS.filter(m => m !== WIDGET_CONFIG.MODEL)];
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+  for (const model of modelsToTry) {
+    try {
+      const result = await tryModelRequest(apiKey, model, messages);
+
+      if (result.ok) {
+        hideWidgetTyping();
+        widgetConversation.push({ role: 'assistant', content: result.reply });
+        saveWidgetConversation();
+        renderWidgetMessages();
+        success = true;
+        break;
+      }
+
+      lastError = result;
+
+      // If 401 (auth issue), don't try other models
+      if (result.status === 401) break;
+
+      // If 429 (rate limit), try next model
+      // If 404 (model not found), try next model
+    } catch (error) {
+      lastError = { status: 0, error: error.message };
     }
-
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || 'Sorry yaar, koi response nahi mila.';
-
-    widgetConversation.push({ role: 'assistant', content: reply });
-    saveWidgetConversation();
-    renderWidgetMessages();
-  } catch (error) {
-    hideWidgetTyping();
-    if (error.message.includes('401')) {
-      widgetConversation.push({ role: 'assistant', content: 'API key invalid hai. Reset karo aur naya daalo.' });
-    } else {
-      widgetConversation.push({ role: 'assistant', content: `Error: ${error.message}` });
-    }
-    saveWidgetConversation();
-    renderWidgetMessages();
-  } finally {
-    widgetIsLoading = false;
-    document.getElementById('widget-send').disabled = false;
-    document.getElementById('widget-input').disabled = false;
   }
+
+  if (!success) {
+    hideWidgetTyping();
+    let errorMsg;
+
+    if (lastError?.status === 401 || lastError?.error?.includes('User not found') || lastError?.error?.includes('No auth')) {
+      errorMsg = '**API Key Invalid Hai 🔑**\n\nOpenRouter ka naya key banao:\n\n1. <a href="https://openrouter.ai/keys" target="_blank">openrouter.ai/keys</a> pe jao\n2. Sign up / Login\n3. "Create Key" se naya key banao\n4. Niche click karke replace karo:\n\n<a href="javascript:resetWidgetApiKey()" style="color:var(--green);font-weight:700;">→ Naya Key Daalo</a>';
+    } else if (lastError?.status === 429) {
+      errorMsg = '**Rate Limit Hit 🚦**\n\nThodi der baad try karo. Free models ki daily limit hoti hai.';
+    } else if (lastError?.error?.includes('credit')) {
+      errorMsg = '**Credit Issue 💳**\n\nOpenRouter account mein credit khatam ho gayi. Free tier limit ya naya account use karo.';
+    } else {
+      errorMsg = `**Network Issue 📡**\n\n${lastError?.error || 'Connection problem'}. Phir try karo.`;
+    }
+
+    widgetConversation.push({ role: 'assistant', content: errorMsg });
+    saveWidgetConversation();
+    renderWidgetMessages();
+  }
+
+  widgetIsLoading = false;
+  document.getElementById('widget-send').disabled = false;
+  document.getElementById('widget-input').disabled = false;
+}
+
+function resetWidgetApiKey() {
+  localStorage.removeItem('openrouter_api_key');
+  WIDGET_CONFIG.OPENROUTER_API_KEY = '';
+  showApiKeyModal();
 }
 
 function askWidgetSuggestion(text) {

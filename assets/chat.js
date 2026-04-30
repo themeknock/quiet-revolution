@@ -55,13 +55,15 @@ Always be helpful, specific, and Pakistani-context aware.`;
 
 // Configuration
 const CONFIG = {
-  OPENROUTER_API_KEY: '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',
+  // Paste your OpenRouter API key here for shared access
+  // Get free key: https://openrouter.ai/keys
+  OPENROUTER_API_KEY: '',
   MODEL: 'google/gemini-2.0-flash-exp:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 1000,
   TEMPERATURE: 0.7,
-  SITE_URL: 'https://talhaatariq.github.io/quiet-revolution',
-  SITE_NAME: 'The Quiet Revolution'
+  SITE_URL: 'https://themeknock.github.io/quiet-revolution',
+  SITE_NAME: 'Talha AI Guide'
 };
 
 // Conversation state
@@ -70,8 +72,16 @@ let isLoading = false;
 
 // Load API key from localStorage if exists
 function getApiKey() {
-  return CONFIG.OPENROUTER_API_KEY || localStorage.getItem('openrouter_api_key') || '';
+  // localStorage takes priority over hardcoded default
+  return localStorage.getItem('openrouter_api_key') || CONFIG.OPENROUTER_API_KEY || '';
 }
+
+const FALLBACK_MODELS_FULL = [
+  'google/gemini-2.0-flash-exp:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'deepseek/deepseek-chat-v3.1:free',
+  'qwen/qwen-2.5-72b-instruct:free'
+];
 
 function setApiKey(key) {
   localStorage.setItem('openrouter_api_key', key);
@@ -123,10 +133,11 @@ function renderMessages() {
 }
 
 function formatMessage(text) {
-  // Simple markdown-like formatting
+  // Markdown link, bold, italic, code, paragraphs
   return text
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)]+|javascript:[^)]+)\)/g, '<a href="$2" target="_blank" style="color:var(--green);font-weight:600;">$1</a>')
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code>$1</code>')
     .replace(/\n\n/g, '</p><p>')
     .replace(/\n/g, '<br>')
@@ -161,7 +172,33 @@ function hideTyping() {
   if (el) el.remove();
 }
 
-// Send message to OpenRouter
+async function tryFullModelRequest(apiKey, model, messages) {
+  const response = await fetch(CONFIG.API_URL, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': CONFIG.SITE_URL,
+      'X-Title': CONFIG.SITE_NAME
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: messages,
+      max_tokens: CONFIG.MAX_TOKENS,
+      temperature: CONFIG.TEMPERATURE
+    })
+  });
+
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    return { ok: false, status: response.status, error: data.error?.message || `HTTP ${response.status}` };
+  }
+  const reply = data.choices?.[0]?.message?.content;
+  if (!reply) return { ok: false, status: 200, error: 'Empty response' };
+  return { ok: true, reply };
+}
+
+// Send message to OpenRouter with fallback models
 async function sendMessage(userMessage) {
   if (isLoading) return;
   const apiKey = getApiKey();
@@ -178,54 +215,50 @@ async function sendMessage(userMessage) {
   addUserMessage(userMessage);
   showTyping();
 
-  try {
-    const messages = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...conversation.slice(-10).map(m => ({ role: m.role, content: m.content }))
-    ];
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...conversation.slice(-10).map(m => ({ role: m.role, content: m.content }))
+  ];
 
-    const response = await fetch(CONFIG.API_URL, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': CONFIG.SITE_URL,
-        'X-Title': CONFIG.SITE_NAME
-      },
-      body: JSON.stringify({
-        model: CONFIG.MODEL,
-        messages: messages,
-        max_tokens: CONFIG.MAX_TOKENS,
-        temperature: CONFIG.TEMPERATURE
-      })
-    });
+  const modelsToTry = [CONFIG.MODEL, ...FALLBACK_MODELS_FULL.filter(m => m !== CONFIG.MODEL)];
+  let lastError = null;
+  let success = false;
 
-    hideTyping();
-
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+  for (const model of modelsToTry) {
+    try {
+      const result = await tryFullModelRequest(apiKey, model, messages);
+      if (result.ok) {
+        hideTyping();
+        addBotMessage(result.reply);
+        success = true;
+        break;
+      }
+      lastError = result;
+      if (result.status === 401) break;
+    } catch (error) {
+      lastError = { status: 0, error: error.message };
     }
-
-    const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || 'Sorry yaar, koi response nahi mila. Phir try karo.';
-
-    addBotMessage(reply);
-  } catch (error) {
-    hideTyping();
-    console.error('Chat error:', error);
-
-    if (error.message.includes('401') || error.message.includes('API key')) {
-      addBotMessage('API key invalid ya expired hai yaar. Naya key daalo:\n\n[Reset API Key](javascript:resetApiKey())');
-    } else {
-      addBotMessage(`Error aaya: ${error.message}\n\nThodi der baad try karo. Ya GitHub pe issue report karo.`);
-    }
-  } finally {
-    isLoading = false;
-    document.getElementById('chatSend').disabled = false;
-    document.getElementById('chatInput').disabled = false;
-    document.getElementById('chatInput').focus();
   }
+
+  if (!success) {
+    hideTyping();
+    let errorMsg;
+    if (lastError?.status === 401 || lastError?.error?.includes('User not found') || lastError?.error?.includes('No auth')) {
+      errorMsg = '**API Key Invalid 🔑**\n\nOpenRouter ka naya key chahiye:\n\n1. [openrouter.ai/keys](https://openrouter.ai/keys) pe jao\n2. Sign up / Login\n3. "Create Key" se naya key banao\n4. [Naya Key Yahan Daalo](javascript:resetApiKey())';
+    } else if (lastError?.status === 429) {
+      errorMsg = '**Rate Limit Hit 🚦**\n\nThodi der baad try karo.';
+    } else if (lastError?.error?.includes('credit')) {
+      errorMsg = '**Credit Issue 💳**\n\nOpenRouter credit khatam. Free tier limit hit ya naya account banao.';
+    } else {
+      errorMsg = `**Network Issue 📡**\n\n${lastError?.error || 'Connection problem'}. Phir try karo.`;
+    }
+    addBotMessage(errorMsg);
+  }
+
+  isLoading = false;
+  document.getElementById('chatSend').disabled = false;
+  document.getElementById('chatInput').disabled = false;
+  document.getElementById('chatInput').focus();
 }
 
 function promptForApiKey() {
