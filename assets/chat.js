@@ -56,7 +56,7 @@ Always be helpful, specific, and Pakistani-context aware.`;
 // Configuration
 const CONFIG = {
   OPENROUTER_API_KEY: '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',
-  MODEL: 'google/gemini-2.0-flash-exp:free',
+  MODEL: 'openai/gpt-oss-120b:free',
   API_URL: 'https://openrouter.ai/api/v1/chat/completions',
   MAX_TOKENS: 1000,
   TEMPERATURE: 0.7,
@@ -75,10 +75,11 @@ function getApiKey() {
 }
 
 const FALLBACK_MODELS_FULL = [
-  'google/gemini-2.0-flash-exp:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'deepseek/deepseek-chat-v3.1:free',
-  'qwen/qwen-2.5-72b-instruct:free'
+  'openai/gpt-oss-120b:free',
+  'google/gemma-4-31b-it:free',
+  'qwen/qwen3-next-80b-a3b-instruct:free',
+  'z-ai/glm-4.5-air:free',
+  'minimax/minimax-m2.5:free'
 ];
 
 function setApiKey(key) {
